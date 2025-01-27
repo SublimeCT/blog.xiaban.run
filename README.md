@@ -4,11 +4,11 @@ A static blog template built with [Astro](https://astro.build).
 
 [**🖥️ Live Demo (Vercel)**](https://fuwari.vercel.app)&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
 [**📦 Old Hexo Version**](https://github.com/saicaca/hexo-theme-vivia)&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
-[**🌏 中文**](https://github.com/saicaca/fuwari/blob/main/README.zh-CN.md)&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
-[**🌏 日本語**](https://github.com/saicaca/fuwari/blob/main/README.ja-JP.md)&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
-[**🌏 한국어**](https://github.com/saicaca/fuwari/blob/main/README.ko.md)&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
-[**🌏 Español**](https://github.com/saicaca/fuwari/blob/main/README.es.md)&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
-[**🌏 ไทย**](https://github.com/saicaca/fuwari/blob/main/README.th.md)
+[**🌏 中文**](https://github.com/SublimeCT/xiaban.run/blob/main/README.zh-CN.md)&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+[**🌏 日本語**](https://github.com/SublimeCT/xiaban.run/blob/main/README.ja-JP.md)&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+[**🌏 한국어**](https://github.com/SublimeCT/xiaban.run/blob/main/README.ko.md)&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+[**🌏 Español**](https://github.com/SublimeCT/xiaban.run/blob/main/README.es.md)&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+[**🌏 ไทย**](https://github.com/SublimeCT/xiaban.run/blob/main/README.th.md)
 
 > README version: `2024-09-10`
 
@@ -54,7 +54,7 @@ lang: jp      # Set only if the post's language differs from the site's language
 All commands are run from the root of the project, from a terminal:
 
 | Command                             | Action                                           |
-|:------------------------------------|:-------------------------------------------------|
+| :---------------------------------- | :----------------------------------------------- |
 | `pnpm install` AND `pnpm add sharp` | Installs dependencies                            |
 | `pnpm dev`                          | Starts local dev server at `localhost:4321`      |
 | `pnpm build`                        | Build your production site to `./dist/`          |

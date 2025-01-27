@@ -1,7 +1,7 @@
 # About
-This is the demo site for [Fuwari](https://github.com/saicaca/fuwari).
+This is the demo site for [Ryan](https://github.com/SublimeCT).
 
-::github{repo="saicaca/fuwari"}
+::github{repo="SublimeCT/xiaban.run"}
 
 > ### Sources of images used in this site
 > - [Unsplash](https://unsplash.com/)
