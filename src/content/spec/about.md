@@ -1,7 +1,7 @@
 # About
 This is the demo site for [Ryan](https://github.com/SublimeCT).
 
-::github{repo="SublimeCT/xiaban.run"}
+::github{repo="SublimeCT/blog.xiaban.run"}
 
 > ### Sources of images used in this site
 > - [Unsplash](https://unsplash.com/)

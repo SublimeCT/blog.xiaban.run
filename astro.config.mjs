@@ -21,7 +21,7 @@ import { remarkReadingTime } from './src/plugins/remark-reading-time.mjs'
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'http://xiaban.run',
+  site: 'http://blog.xiaban.run',
   base: '/',
   trailingSlash: 'always',
   integrations: [
