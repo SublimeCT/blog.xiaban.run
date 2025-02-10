@@ -6,6 +6,8 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build && pagefind --site dist",
+    "build:deploy": "pnpm run build && pnpm run deploy",
+    "deploy": "rsync -avz ./dist/ root@47.96.124.139:/srv/blog-dist/dist/",
     "preview": "astro preview",
     "astro": "astro",
     "type-check": "tsc --noEmit --isolatedDeclarations",
