@@ -1,7 +1,7 @@
 ---
-title: configure-domain-name-mailbox
+title: 阿里云配置域名邮箱
 published: 2025-02-10
-description: '阿里云配置域名邮箱'
+description: '使用阿里邮箱的免费版配置自己的域名邮箱'
 image: './assets/images/mail.png'
 tags: [
   '阿里云',
@@ -14,7 +14,7 @@ draft: false
 lang: 'zh-CN'
 ---
 
-当拥有自己的域名之后, 就可以使用 **阿里邮箱(免费版)** 配置自己的 **域名邮箱** 了, 例如域名是 `example.com`, 就可以创建 `xxx@example.com` 的邮箱了
+当拥有自己的域名之后, 就可以使用 **阿里邮箱(免费版)** 配置自己的 **域名邮箱** 了, 例如域名是 `example.com`, 就可以创建 `xxx@example.com` 的邮箱, 并直接通过 阿里邮箱 进行文件收发, 不需要自己搭建邮件系统
 
 ## 1. 购买阿里邮箱(免费版)
 ![](./assets/images/aliyun-mail-pay.png)
