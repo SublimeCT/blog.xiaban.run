@@ -28,7 +28,9 @@ if (!fileExtensionRegex.test(fileName)) {
   fileName += '.md'
 }
 
-const targetDir = './src/content/posts/'
+const date = new Date()
+const year = date.getFullYear()
+const targetDir = `./src/content/posts/${year}`
 const fullPath = path.join(targetDir, fileName)
 
 if (fs.existsSync(fullPath)) {
