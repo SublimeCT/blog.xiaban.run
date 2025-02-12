@@ -167,6 +167,7 @@ vi = True
 multi_line = True
 ```
 
+在 `multiline` 模式下, 只有在输入 `;` 后才会执行, 可以直接换行
 :::
 
 
@@ -255,9 +256,31 @@ CREATE TABLE employees (
 );
 
 -- 查看所有表
-\c dbbane # 切换上下文数据库
+\c dbname # 切换上下文数据库
 \d
 -- SELECT * FROM pg_tables WHERE schemaname = 'public';
+
+-- 查看表结构
+\d employees
+
+-- 修改表结构
+ALTER TABLE employees ADD COLUMN email VARCHAR(100); -- 新增列
+ALERT TABLE employees RENAME COLUMN age TO age_in_years; -- 修改列名
+ALTER TABLE employees DROP COLUMN email; -- 删除列
+ALTER TABLE employees ALTER COLUMN age TYPE INT; -- 修改列数据类型
+ALTER TABLE employees ALTER COLUMN age SET DEFAULT 18; -- 修改列默认值
+ALTER TABLE employees ALTER COLUMN age DROP DEFAULT; -- 删除默认值
+ALTER TABLE employees ALTER COLUMN age SET NOT NULL; -- 不为空
+ALTER TABLE employees ALTER COLUMN age DROP NOT NULL; -- 可为空
+
+-- 重命名表
+ALTER TABLE employees RENAME TO new_employees;
+
+-- 删除表
+DROP TABLE IF EXISTS employees;
+
+-- 删除表数据
+TRUNCATE TABLE employees;
 
 -- 创建索引
 CREATE INDEX idx_employees_name ON employees (name);
@@ -273,6 +296,19 @@ UPDATE employees SET age = 31 WHERE name = 'John Doe';
 
 -- 删除数据
 DELETE FROM employees WHERE name = 'John Doe';
+```
+
+### 事务
+```sql
+BEGIN; -- 开始事务
+
+-- 执行一些操作 ...
+UPDATE employees SET age = 31 WHERE name = 'John Doe'; -- 更新第一条数据
+SAVEPOINT my_savepoint;
+
+
+COMMIT; -- 提交事务
+ROLLBACK; -- 回滚事务
 ```
 
 ### 视图
@@ -313,3 +349,7 @@ pg_dump mydatabase > mydatabase_backup.sql
 ```bash
 psql -d mydatabase mydatabase_backup.sql
 ```
+
+## 参考
+- [官方文档 v17](https://www.postgresql.org/docs/17/index.html)
+- [pg 使用规范](https://wiki.sqlfans.cn/postgresql/pg-std-using.html)
