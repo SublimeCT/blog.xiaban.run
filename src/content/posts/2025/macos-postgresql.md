@@ -161,6 +161,12 @@ vim ~/.config/pgcli/config
 ```bash
 vi = True
 ```
+
+另外, 如果你更习惯多行模式, 可以配置默认启用 `Multiline`:
+```bash
+multi_line = True
+```
+
 :::
 
 
@@ -195,6 +201,8 @@ psql -h 192.168.1.100 -p 5432 -U myuser -d mydatabase
 ```
 
 ## 基础操作
+> 更多操作可以参考 [官方文档 v17](https://www.postgresql.org/docs/17/index.html) / [pg 使用规范](https://wiki.sqlfans.cn/postgresql/pg-std-using.html)
+
 ### 用户与权限
 #### 创建用户
 在 `PostgreSQL` 中，可以通过 `CREATE ROLE` 命令创建用户。`CREATE ROLE` 是一个通用命令，用于创建角色（包括用户和组角色）。用户本质上是一种可以登录的特殊角色
@@ -202,34 +210,38 @@ psql -h 192.168.1.100 -p 5432 -U myuser -d mydatabase
 ```sql
 CREATE ROLE myuser WITH LOGIN PASSWORD 'mypassword';
 
-# 创建超级管理员账户
+-- 创建超级管理员账户
 CREATE ROLE myuser WITH LOGIN PASSWORD 'mypassword' SUPERUSER;
 ```
 
 #### 超级管理员权限
 
 ```sql
-# 为已有用户分配超级管理员权限
+-- 为已有用户分配超级管理员权限
 ALTER USER myuser WITH SUPERUSER;
 ```
 
 #### 分配普通权限
 
 ```sql
-# 允许用户 myuser 连接到数据库 mydatabase
+-- 允许用户 myuser 连接到数据库 mydatabase
 GRANT CONNECT ON DATABASE mydatabase TO myuser;
 
-# 允许用户 myuser 对 public 模式中的所有表执行 SELECT、INSERT、UPDATE 和 DELETE 操作
+-- 允许用户 myuser 对 public 模式中的所有表执行 SELECT、INSERT、UPDATE 和 DELETE 操作
 GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO myuser;
 ```
 
 ### 数据库
 ```sql
-# 创建数据库
-# 创建完成后，可以使用 `\c mydatabase` 命令切换到该数据库
+-- 查看所有数据库
+SELECT * FROM pg_database;
+
+\list
+-- 创建数据库
+-- 创建完成后，可以使用 `\c mydatabase` 命令切换到该数据库
 CREATE DATABASE mydatabase;
 
-# 删除数据库
+-- 删除数据库
 DROP DATABASE IF EXISTS mydatabase;
 ```
 
@@ -242,19 +254,24 @@ CREATE TABLE employees (
     department VARCHAR(50)
 );
 
-# 创建索引
+-- 查看所有表
+\c dbbane # 切换上下文数据库
+\d
+-- SELECT * FROM pg_tables WHERE schemaname = 'public';
+
+-- 创建索引
 CREATE INDEX idx_employees_name ON employees (name);
 
-# 插入数据
+-- 插入数据
 INSERT INTO employees (name, age, department) VALUES ('John Doe', 30, 'Marketing');
 
-# 查询数据
+-- 查询数据
 SELECT * FROM employees;
 
-# 更新数据
+-- 更新数据
 UPDATE employees SET age = 31 WHERE name = 'John Doe';
 
-# 删除数据
+-- 删除数据
 DELETE FROM employees WHERE name = 'John Doe';
 ```
 
@@ -263,10 +280,10 @@ DELETE FROM employees WHERE name = 'John Doe';
 CREATE VIEW marketing_employees AS
 SELECT * FROM employees WHERE department = 'Marketing';
 
-# 查询视图
+-- 查询视图
 SELECT * FROM marketing_employees;
 
-# 删除视图
+-- 删除视图
 DROP VIEW IF EXISTS marketing_employees;
 ```
 
