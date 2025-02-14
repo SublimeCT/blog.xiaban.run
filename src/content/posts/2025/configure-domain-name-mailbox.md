@@ -16,6 +16,10 @@ lang: 'zh-CN'
 
 当拥有自己的域名之后, 就可以使用 **阿里邮箱(免费版)** 配置自己的 **域名邮箱** 了, 例如域名是 `example.com`, 就可以创建例如 `xxx@example.com` 的邮箱, 并直接通过 阿里邮箱 进行邮件收发, 不需要自己搭建邮件系统
 
+:::tip
+通过服务器直接发送邮件可以参考 [通过服务器发送邮件](http://localhost:4321/posts/2025/server-mail/)
+:::
+
 ## 1. 购买阿里邮箱(免费版)
 ![](./assets/images/aliyun-mail-pay.png)
 
@@ -63,3 +67,4 @@ lang: 'zh-CN'
 ## 参考
 - [阿里邮箱 - 版本介绍](https://help.aliyun.com/document_detail/437165.html)
 - [阿里邮箱 - 开通指南](https://help.aliyun.com/document_detail/36698.html)
+- [阿里邮箱网页端](https://qiye.aliyun.com)
