@@ -1,5 +1,5 @@
 ---
-title: 服务器配置发送邮件
+title: 服务器请求阿里邮箱服务器发送邮件
 published: 2025-02-13
 description: '有时在服务器上触发某些事件时, 需要向用户发送邮件, 使用 msmtp 实现发送邮件, 如果已经开通了阿里邮箱, 就无需自己搭建邮件服务器'
 image: './assets/images/postfix.jpg'
@@ -151,3 +151,4 @@ echo -e "Subject: 这是一封测试发送的邮件, 来自服务器\n\n这里�
 - [msmtp](https://wiki.archlinux.org/title/Msmtp)
 - [Ubuntu Linux 搭建邮件服务器（postfix + dovecot）](https://www.cnblogs.com/007sx/p/18347813)
 - [阿里邮箱网页端](https://qiye.aliyun.com)
+- [阿里邮箱 - 客户端配置](https://help.aliyun.com/document_detail/36576.html?spm=5176.21213303.J_v8LsmxMG6alneH-O7TCPa.7.7e842f3dt7Ez4P&scm=20140722.S_help@@%E6%96%87%E6%A1%A3@@36576._.ID_help@@%E6%96%87%E6%A1%A3@@36576-RL_465%E7%AB%AF%E5%8F%A3-LOC_llm-OR_ser-PAR1_2150440e17395222609746582e4052-V_4-RE_new5-P0_1-P1_0#:~:text=25-,465,-%E6%B3%A8%EF%BC%9A%E4%BB%A5%E4%B8%8B%E8%80%81)

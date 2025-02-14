@@ -24,7 +24,7 @@ lang: 'zh-CN'
 [Let's Encrypt](https://letsencrypt.org/zh-cn/): 这是一个由非营利性组织互联网安全研究小组（`ISRG`）提供的免费、自动化和开放的证书颁发机构。它为众多网站提供 `TLS` 证书，其免费证书的签发/续签可以通过脚本自动化完成, **简而言之就是可以免费一直用**
 
 ### certbot
-[Let's Encrypt](https://letsencrypt.org/zh-cn/) 使用 `ACME` 协议来验证您对给定域名的控制权并向您颁发证书。 要获得 [Let's Encrypt](https://letsencrypt.org/zh-cn/) 证书，您需要选择一个要使用的 ACME 客户端软件, 而 [Certbot](https://github.com/certbot/certbot) 就是 [Let's Encrypt](https://letsencrypt.org/zh-cn/) 推荐的客户端
+[Let's Encrypt](https://letsencrypt.org/zh-cn/) 使用 `ACME` 协议来验证您对给定域名的控制权并向您颁发证书。 要获得 [Let's Encrypt](https://letsencrypt.org/zh-cn/) 证书，您需要选择一个使用 ACME 客户端软件, 而 [Certbot](https://github.com/certbot/certbot) 就是 [Let's Encrypt](https://letsencrypt.org/zh-cn/) 推荐的客户端
 
 ## 安装
 :::tip
