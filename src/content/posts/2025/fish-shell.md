@@ -46,8 +46,9 @@ sudo apt install fish
 1. 查看 fish 路径
 
 ```bash
-wihch shell
+wihch fish
 /opt/homebrew/bin/fish
+```
 
 2. 尝试使用 chsh 命令设置 fish 为默认 shell
 ```bash
@@ -74,7 +75,7 @@ echo "/opt/homebrew/bin/fish" | sudo tee -a /etc/shells > /dev/null
 **[fish shell](https://fishshell.com/) 的配置文件在 `~/.config/fish/config.fish`**
 
 ### 配置文件
-在 [fish shell](https://fishshell.com/) 的配置文件中一般会设置一些 **环境变量 / function / fish 配置** 等, 以下是一些实例:
+在 [fish shell](https://fishshell.com/) 的配置文件中一般会设置一些 **环境变量 / function / fish 配置** 等, 以下是一些示例:
 
 #### 环境变量
 将 `~/.cargo/bin` 加入系统环境变量 `PATH` 中:
@@ -124,14 +125,14 @@ source ~/.config/fish/config.fish
 
 此时 **在终端命令行中就可以使用 `vim` 的常用操作了**, 对于 `vim` 党非常友好, 例如:
 
-模式:
-- `Insert Mode`
-- `Command Mode`
-- `Visual Mode`
+- 模式:
+  - `Insert Mode`
+  - `Command Mode`
+  - `Visual Mode`
 
-光标移动: `hjkl` / `0` / `$` / `w` / `b` / `e` / `...`
-编辑: `dd` / `D` / `u` / `C-r` / `...`
-其他: `/` 搜索历史记录
+- 光标移动: `hjkl` / `0` / `$` / `w` / `b` / `e` / `...`
+- 编辑: `dd` / `D` / `u` / `C-r` / `...`
+- 其他: `/` 搜索历史记录
 
 ### fish_config
 `fish_config` 是一个图形化配置工具, 可以通过它来配置 `fish shell` 的 `colors` / `prompt` / `functions` / ...
