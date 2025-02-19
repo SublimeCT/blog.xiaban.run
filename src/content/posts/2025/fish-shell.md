@@ -9,7 +9,7 @@ tags: [
   'shell'
 ]
 category: 'guide'
-draft: true 
+draft: false 
 lang: 'zh-CN'
 ---
 
