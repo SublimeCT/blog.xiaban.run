@@ -26,7 +26,7 @@ lang: 'zh-CN'
 ### certbot
 [Let's Encrypt](https://letsencrypt.org/zh-cn/) 使用 `ACME` 协议来验证您对给定域名的控制权并向您颁发证书。 要获得 [Let's Encrypt](https://letsencrypt.org/zh-cn/) 证书，您需要选择一个使用 ACME 客户端软件, 而 [Certbot](https://github.com/certbot/certbot) 就是 [Let's Encrypt](https://letsencrypt.org/zh-cn/) 推荐的客户端
 
-## 安装
+## 安装 cerbot
 :::tip
 服务器环境为 `Ubuntu 22.04`
 :::
@@ -36,8 +36,15 @@ sudo snap install --classic certbot
 # sudo apt-get install certbot # 或者使用 apt 安装
 ```
 
+## 安装 aliyun cli
+
+## 安装 certbot-dns-aliyun 插件
+::github{repo="justjavac/certbot-dns-aliyun"}
+
 ## 参考
 - [Certbot](https://github.com/certbot/certbot)
 - [Let's Encrypt](https://letsencrypt.org/zh-cn/)
 - [ACME 客户端](https://letsencrypt.org/zh-cn/docs/client-options/)
 - [使用Let's Encrypt 申请通配符证书](https://juejin.cn/post/7383263356184641573)
+- [certbot-dns-aliyun](https://github.com/justjavac/certbot-dns-aliyun)
+
