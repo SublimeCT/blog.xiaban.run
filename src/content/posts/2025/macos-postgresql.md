@@ -75,7 +75,7 @@ psql -d postgres # 进入 postgres 数据库
 
 postgres=# CREATE DATABASE xxxx OWNER xxxx;
 CREATE DATABASE
-postgres=# GRANT ALL PRIVILEGES ON DATABASE database xxxx TO xxxx;
+postgres=# GRANT ALL PRIVILEGES ON DATABASE xxxx TO xxxx;
 GRANT
 postgres=# exit
 ```
@@ -265,7 +265,7 @@ CREATE TABLE employees (
 
 -- 修改表结构
 ALTER TABLE employees ADD COLUMN email VARCHAR(100); -- 新增列
-ALERT TABLE employees RENAME COLUMN age TO age_in_years; -- 修改列名
+ALTER TABLE employees RENAME COLUMN age TO age_in_years; -- 修改列名
 ALTER TABLE employees DROP COLUMN email; -- 删除列
 ALTER TABLE employees ALTER COLUMN age TYPE INT; -- 修改列数据类型
 ALTER TABLE employees ALTER COLUMN age SET DEFAULT 18; -- 修改列默认值
