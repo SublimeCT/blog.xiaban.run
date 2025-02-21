@@ -8,7 +8,7 @@ tags: [
   'terminal',
   'shell'
 ]
-category: 'guide'
+category: '教程'
 draft: false 
 lang: 'zh-CN'
 ---
@@ -94,7 +94,6 @@ set -Ux PATH $CARGO_HOME/bin $PATH
 #### function
 增加用于设置代理的 `proxy function`:
 ```bash
-# proxy [Address of proxy]
 function proxy
     set -Ux all_proxy http://127.0.0.1:7890
     set -Ux http_proxy http://127.0.0.1:7890

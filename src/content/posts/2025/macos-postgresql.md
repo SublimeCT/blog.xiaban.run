@@ -10,7 +10,7 @@ tags: [
   'macos',
   'postgresql 17'
 ]
-category: 'guide'
+category: '教程'
 draft: false 
 lang: 'zh-CN'
 ---

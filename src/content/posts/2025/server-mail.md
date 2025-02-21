@@ -9,7 +9,7 @@ tags: [
   '邮件',
   '发送邮件'
 ]
-category: 'guide'
+category: '教程'
 draft: false 
 lang: 'zh-CN'
 ---

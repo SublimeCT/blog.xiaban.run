@@ -10,7 +10,7 @@ tags: [
   'SSL 证书',
   '阿里云'
 ]
-category: 'guide'
+category: '教程'
 draft: true 
 lang: 'zh-CN'
 ---

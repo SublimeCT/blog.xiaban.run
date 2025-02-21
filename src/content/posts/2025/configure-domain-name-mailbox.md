@@ -9,7 +9,7 @@ tags: [
   '阿里邮箱',
   '免费'
 ]
-category: 'guide'
+category: '教程'
 draft: false 
 lang: 'zh-CN'
 ---

@@ -8,7 +8,7 @@ tags: [
   'systemctl',
   'command'
 ]
-category: 'note'
+category: '教程'
 draft: false 
 lang: 'zh-CN'
 ---
