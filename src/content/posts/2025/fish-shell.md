@@ -197,3 +197,4 @@ help
 ## 参考
 - [fish shell](https://fishshell.com/)
 - [oh-my-fish](https://github.com/oh-my-fish/oh-my-fish)
+- [starshop](https://starship.rs/zh-CN/guide/)

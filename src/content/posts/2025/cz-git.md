@@ -1,7 +1,7 @@
 ---
-title: 基于 cz-git 实现规范化的 git message
+title: 使用 ChatGPT 生成 git message
 published: 2025-02-22
-description: '工程性更强，轻量级，高度自定义，输出标准格式的 Commitizen 适配器和 CLI'
+description: 'cz-git 是一个工程性更强，轻量级，高度自定义，输出标准格式的 Commitizen 适配器和 CLI'
 image: './assets/images/cz-git-logo.png'
 tags: [
   'cz-git',
