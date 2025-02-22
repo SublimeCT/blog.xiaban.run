@@ -9,7 +9,7 @@ tags: [
   'commitizen'
 ]
 category: '教程'
-draft: true 
+draft: false 
 lang: 'zh-CN'
 ---
 
@@ -139,6 +139,18 @@ pnpm i -D cross-env czg # 建议作为项目依赖使用, 同样是为了防止�
 由于我们的配置文件(`commitlint.config.ts`), 所以需要加入 *实验性参数*, 详见 [TypeScript 模板](https://cz-git.qbb.sh/zh/config/#typescript-模板)
 :::
 
+修改配置文件 `commitlint.config.ts` 以启用 AI 生成功能:
+```typescript
+import type { UserConfig } from 'cz-git'
+
+const config: UserConfig = {
+  // ...
+  useAI: true,
+  aiModel: 'gpt-4o-mini',
+  aiNumber: 6, // 生成 6 条信息提供给我们选择
+}
+```
+
 设置好 `API` 地址 和 `API key`, 设置好后会写入 `~/.czrc` 文件中
 ```bash
 pnpm run cz ai --api-endpoint=https://<your-path>/v1
@@ -162,16 +174,53 @@ feat: update TypeScript formatter to Prettier and enhance commitlint config
 ? 是否提交或修改commit ? Modify and additional message with prompt
 ```
 
-默认输出的是英文, 我们可以在 `commitlint.config.ts` 添加 `prompt` 来约束提交信息:
-```typescript
+默认输出的是英文, 我们可以在 `commitlint.config.ts` 添加 `prompt` 来约束生成的提交信息:
+```diff
 import type { UserConfig } from 'cz-git'
 
 const config: UserConfig = {
-  aiQuestionCB({ maxSubjectLength, diff }) {
-    return `用完整句子为以下 Git diff 代码写一个有见解并简洁的 Git 中文提交消息，不加任何前缀，并且内容不能超过 ${maxSubjectLength} 个字符: \`\`\`diff\n${diff}\n\`\`\``
-  },
+  // ...
+  useAI: true,
+  aiModel: 'gpt-4o-mini',
+  aiNumber: 6,
++  aiQuestionCB({ maxSubjectLength, diff }) {
++    return `用完整句子为以下 Git diff 代码写一个有见解并简洁的 Git 中文提交消息，不加任何前缀，并且内容不能超过 ${maxSubjectLength} 个字符: \`\`\`diff\n${diff}\n\`\`\``
++  },
 }
 ```
+
+最后, 我们再次提交:
+
+```bash
+pnpm run cz ai
+
+> fuwari@0.0.1 cz /Users/xxx/projects/blog.xiaban.run
+> cross-env NODE_OPTIONS='--experimental-transform-types --disable-warning ExperimentalWarning' czg "ai"
+
+czg@1.11.0
+
+? 选择你要提交的类型 : feat:     新增功能 | A new feature
+ℹ Generating your AI commit subject...
+? Select suitable subject by AI generated: Use arrow keys or type to search
+❯ 更新 TypeScript 的默认格式化工具为 Prettier，并调整 commitlint 配置以增强提交提示信息，同时添加 cross-env 和 czg 依赖
+  更新 VSCode TypeScript 格式化工具为 Prettier，调整 commitlint 配置以支持更多提交类型，并添加 cross-env 依赖，优化项目构建配置
+  更新 TypeScript 格式化工具为 Prettier，调整 commitlint 配置以支持更多类型，并添加 cross-env 依赖以优化环境变量设置
+  更新 VSCode 配置以使用 Prettier 作为 TypeScript 的默认格式化工具，同时优化 commitlint 配置，新增支持的提交类型和依赖项
+  更新 Visual Studio Code 的 TypeScript 格式化工具为 Prettier，并优化 commitlint 配置，增加对自定义问题前缀的支持
+  修改了 VSCode 的 TypeScript 默认格式化工具为 Prettier，并更新了 commitlint 配置以支持更多提交类型，同时添加了 cross-env 和 czg 依赖
+
+###--------------------------------------------------------###
+feat: 更新 TypeScript 的默认格式化工具为 Prettier，并调整 commitlint 配置以增强提交提示信息，同时添加 cross-env 和 czg 依赖
+###--------------------------------------------------------###
+
+? 是否提交或修改commit ? Yes
+[main cacbaf8] feat: 更新 TypeScript 的默认格式化工具为 Prettier，并调整 commitlint 配置以增强提交提示信息，同时添加 cross-env 和 czg 依赖
+ 8 files changed, 248 insertions(+), 61 deletions(-)
+ create mode 100644 src/content/posts/2025/assets/images/cz-git-openai.gif
+ create mode 100644 src/content/posts/2025/assets/images/cz-git-screenshot.gif
+```
+
+完结撒花 ❤️
 
 ## 参考
 - [cz-git](https://cz-git.qbb.sh/zh/guide/)
