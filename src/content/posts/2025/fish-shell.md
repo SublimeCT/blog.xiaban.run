@@ -178,10 +178,14 @@ omf install bobthefish
 这里推荐从 [ryanoasis/nerd-fonts](https://github.com/ryanoasis/nerd-fonts?tab=readme-ov-file#patched-fonts) 找到自己喜欢的字体, 并在 [releases](https://github.com/ryanoasis/nerd-fonts/releases) 中下载对应的字体文件并在系统上安装, 字体文件比较多, 并不需要都安装, 选择一个系列的全选右键打开安装即可
 
 安装完字体后, 还需要在自己的终端软件中设置字体, 例如在 `iTerm2` 中:
-1. 在终端中右键, 点击 `Edit Session...`
+1. 点击 `iTerm2 > Settings > Profiles > Text`
 2. 进入 `Text > Font`, 选择 `Use a different font for non-ASCII text` 并选择 `Non-ASCII Font` 字体, 或直接在 `Font` 中选择安装的字体
 
-![](./assets/images/iTerm2-text-config.png)
+![](./assets/images/iTerm2-settings-text.png)
+
+:::tip
+如果启用了 `Hotkey Window`, 需要同步设置 `Default` / `Hotkey Window`
+:::
 
 ## 获取帮助
 `fish shell` 提供了一个帮助文档, 执行 `help` 命令即可打开一个帮助文档网页
