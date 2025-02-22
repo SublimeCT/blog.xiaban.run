@@ -1,5 +1,5 @@
 # About
-This is the demo site for [Ryan](https://github.com/SublimeCT).
+Hi, 我是 [Ryan](https://github.com/SublimeCT), 我是一名 ~~努力工作~~ **下班就跑** 的前端开发者
 
 ::github{repo="SublimeCT/blog.xiaban.run"}
 
