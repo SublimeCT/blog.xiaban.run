@@ -443,6 +443,16 @@ customElements.define('my-title', MyTitle)
 `web components` 在 `Safari` 上不支持 `is` 属性, 故不支持扩展内置元素
 :::
 
+## 生态
+
+### 基础框架
+- [Lit](https://lit.dev)
+- [Omi](https://omi.cdn-go.cn/home/latest/zh/)
+
+### UI 组件库
+- [💻 shoelace](https://shoelace.style/)
+- [📱 quark-design](https://github.com/hellof2e/quark-design)
+
 ## vue & web components
 根据 [vue 官方文档](https://cn.vuejs.org/guide/extras/web-components.html#web-components-and-typescript) 对于 `web components` 的描述:
 
