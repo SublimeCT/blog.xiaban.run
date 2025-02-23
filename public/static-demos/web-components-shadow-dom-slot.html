@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <template id="my-title">
+    <style>
+      header {
+        color: red;
+      }
+    </style>
+    <header>
+      <slot name="title">NEED TITLE</slot>
+    </header>
+  </template>
+  <script src="./web-components-shadow-dom-slot.js"></script>
+  <my-title>
+  </my-title>
+  <my-title>
+    <h2 slot="title">title</h2>
+  </my-title>
+</body>
+
+</html>

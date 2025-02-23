@@ -7,7 +7,7 @@ tags: [
   'guide'
 ]
 category: '技术'
-draft: true 
+draft: false 
 lang: 'zh-CN'
 ---
 
@@ -310,14 +310,140 @@ output:
 由此可见, 如果希望获取或设置元素的属性值, 应该在 `connectedCallback` 中
 :::
 
-## web components 的兼容性
+### Shadow DOM
+![](./assets/images/web-components-shadow-dom.png)
+
+也许你已经发现, 在浏览器的 `Elements` 中出现了一个 `#shadow-root` 的节点, 它与其他普通的 `DOM` 节点有明显的不同: **`#shadow-root` 内部的节点不受外部样式和 js 的影响**
+
+![](./assets/images/web-components-shadow-dom-queryselectorall.png)
+
+也无法通过 `querySelectorAll` 在文档中查找到此 `#shadow-root` 内部的元素, **`shadow DOM` 提供了一道与外部文档隔离的屏障**
+
+![](./assets/images/web-components-shadow-dom-getElement.png)
+
+但如果 `shadow DOM` 声明为 `{ mode: 'open' }`, 则可以通过 `shadowRoot` 属性访问内部的节点; 如果我们的组件不想被外部文档访问, 则可以改为 `{ mode: 'closed' }`, 此时自定义元素的 `shadow DOM` 对外部文档来说就是 **完全不可见** 的:
+
+![](./assets/images/web-components-shadow-dom-closed-getElement.png)
+
+#### 使用 CSSStyleSheet 构造样式
+
+<iframe width="100%" height="200" src="/static-demos/web-components-shadow-dom-css.html" title="web-components-shadow-dom-css" frameborder="0"></iframe>
+
+```js {8,11}
+class MyComponent extends HTMLElement {
+  constructor() {
+    super()
+    /** shadow DOM */
+    const shadow = this.attachShadow({ mode: 'open' })
+    const content = document.createElement('div')
+    content.textContent = 'CSSStyleSheet Demo'
+
+    const sheet = new CSSStyleSheet()
+    sheet.replaceSync('div { color: red; font-size: 20px; }')
+
+    shadow.adoptedStyleSheets.push(sheet)
+    shadow.appendChild(content)
+  }
+}
+customElements.define('my-component', MyComponent)
+```
+
+这里我们单独声明了一个 `CSSStyleSheet`, 并在 `shadown` 的 `adopetdStyleSheets` 中加入了该样式, `CSSStyleSheet` 的意义在于:
+
+- **管理样式更加灵活**, 允许向 `shadow DOM` 或其子元素添加多个 `sheet` 模块, 并且可以动态修改样式
+- **便于共享样式**, 如果样式要被多个元素共同使用, 可以将 `sheet` 提取到外部实现共享
+
+#### 使用 template
+
+<iframe width="100%" height="200" src="/static-demos/web-components-shadow-dom-template.html" title="web-components-shadow-dom-css" frameborder="0"></iframe>
+
+```html
+<div>
+  <h1>H1 Title</h1>
+</div>
+<template id="my-template">
+  <style>
+    div {
+      color: red;
+      font-size: 20px;
+    }
+  </style>
+  <div>Template Demo</div>
+</template>
+<my-component></my-component>
+<my-component></my-component>
+```
+
+```javascript
+class MyComponent extends HTMLElement {
+  constructor() {
+    super()
+    /** shadow DOM */
+    const shadow = this.attachShadow({ mode: 'open' })
+
+    const myTemplate = document.getElementById('my-template')
+
+    shadow.appendChild(myTemplate.content.cloneNode(true))
+  }
+}
+customElements.define('my-component', MyComponent)
+```
+
+`<template>` 提供了一种声明式的写法, 并且像 `Shadow DOM` 一样具有样式和 `js` 隔离, 让我们可以实现样式及元素的复用(`cloneNode`), 相比于最初的 [编程式](http://localhost:4321/posts/2025/web-components/#custom-elements) 更加直观, 也更贴近现代化的前端开发体验
+
+### template & slot
+如果你熟悉 `vue`, 那应该会对 `<template>` 感到非常亲切, 在 `vue` 中我们可以写 `<slot>`, 在 `<template>` 中同样可以!
+
+<iframe width="100%" height="200" src="/static-demos/web-components-shadow-dom-slot.html" title="web-components-shadow-dom-css" frameborder="0"></iframe>
+
+```html
+<template id="my-title">
+  <style>
+    header {
+      color: red;
+    }
+  </style>
+  <header>
+    <slot name="title">NEED TITLE</slot>
+  </header>
+</template>
+<script src="./web-components-shadow-dom-slot.js"></script>
+<my-title>
+</my-title>
+<my-title>
+  <h2 slot="title">title</h2>
+</my-title>
+```
+
+```javascript
+class MyTitle extends HTMLElement {
+  constructor() {
+    super()
+    /** shadow DOM */
+    const shadow = this.attachShadow({ mode: 'open' })
+
+    const myTemplate = document.getElementById('my-title')
+
+    shadow.appendChild(myTemplate.content.cloneNode(true))
+  }
+}
+customElements.define('my-title', MyTitle)
+```
+
+## 局限性
+- **生态孱弱, 发展缓慢**, 相比 vue / react, `web components` 显然在生态上更加落后
+- **缺乏响应式系统**, Vue 和 React 的核心优势之一是其响应式数据绑定系统, 可以让 UI 随着数据的变化自动更新, 而 `web components` 需要手动实现
+- **样式封闭**, 无法像 vue / react 一样灵活的继承与覆盖样式
+- **开发效率低下**, `web components` 更加贴近底层, 无法像 `vue` / `react` 一样提供抽象能力
+
+### web components 的兼容性
 :::warning
 根据 [caniuse web components](https://caniuse.com/?search=web%20components):
 
 `web components` 在 `Safari` 上不支持 `is` 属性, 故不支持扩展内置元素
 :::
 
-### vue & web components
+## vue & web components
 根据 [vue 官方文档](https://cn.vuejs.org/guide/extras/web-components.html#web-components-and-typescript) 对于 `web components` 的描述:
 
 > 我们认为 `Vue` 和 `Web Components` 是互补的技术。`Vue` 为使用和创建自定义元素提供了出色的支持。无论你是将自定义元素集成到现有的 `Vue` 应用中，还是使用 `Vue` 来构建和分发自定义元素都很方便
