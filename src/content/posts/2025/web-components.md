@@ -4,7 +4,13 @@ published: 2025-02-21
 description: '前端世界本质上是由一个个组件搭建拼接而成的, web components 使我们能够使用原生 js 实现一个自定义组件'
 image: './assets/images/web-components-banner.avif'
 tags: [
-  'guide'
+  'web components',
+  '原生',
+  'JavaScript',
+  'Custom Element',
+  'shadow dom',
+  'template',
+  'slot'
 ]
 category: '技术'
 draft: false 
