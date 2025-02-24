@@ -67,6 +67,87 @@ lang: 'zh-CN'
 关于 [web components](https://developer.mozilla.org/zh-CN/docs/Web/API/Web_components) 相关技术可以参考我的另一篇文章 [🔗 web components 原生 js 实现自定义组件](./web-components.md)
 :::
 
+## 教程
+
+### 交互式教程
+直接从 <a href="https://lit.dev/learn/#filter=tutorial" target="_blank">🔗 交互式教程</a> 开始看起, 这是一个 **交互式** / **带有 `playground`** 的学习教程, 涵盖了 [Lit](https://lit.dev) 的所有特性
+
+### 示例
+如果要 **快速入门** [Lit](https://lit.dev), <a href="https://lit.dev/playground/#sample=examples/hello-world" target="_blank">🔗 examples</a> 是一个更好的选择
+
+:::tip
+从官方的教程搭配 `ChatGPT` 入门是最好的选择, 这可以确保你快速找到问题的答案
+:::
+
+## 核心特性
+
+首先使用 `vite` 创建一个 `Lit` 项目:
+
+```bash
+pnpm create vite
+✔ Project name: … lit-demo
+✔ Select a framework: › Lit
+✔ Select a variant: › TypeScript
+
+Scaffolding project in /Users/xxx/projects/lit-demo...
+
+Done. Now run:
+
+  cd hyosan-chat
+  pnpm install
+  pnpm run dev
+
+```
+
+```typescript
+import { css, html, LitElement } from "lit";
+import { customElement, property, state } from "lit/decorators.js";
+
+@customElement('count-button')
+export class CountButton extends LitElement {
+  @property()
+  message = 'Count is '
+
+  @state()
+  count = 0
+  handleClick() {
+    this.count++
+  }
+
+  static styles = css`
+    button {
+      padding: 10px;
+      font-size: 18px;
+      border-radius: 10px;
+      border-color: transparent;
+    }
+  `
+  render() {
+    return html`
+      <button @click=${this.handleClick}>${this.message} ${this.count}</button>
+    `
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'count-button': CountButton
+  }
+}
+```
+
+### attribute & property
+在 [Lit](https://lit.dev) 中有两个很容易混淆的概念: `attribute` 和 `property`:
+
+- `attribute`: 指的是元素标签上的属性, 例如 `<my-element foo="bar" />` 中的 `foo`
+- `property`: 指的是元素对象上的属性, 例如 `document.querySelector('my-element').foo` 中的 `foo`
+
+:::tip
+相比于 `attribute`, `property` 可以接受任意类型的值, 而 `attribute` 只能接受字符串类型
+:::
+
+更多配置参数可参考:
+- [property options](https://lit.dev/docs/components/properties/#property-options)
 
 ## 参考
 - [Lit](https://lit.dev)
