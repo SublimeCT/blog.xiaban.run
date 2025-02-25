@@ -79,8 +79,6 @@ lang: 'zh-CN'
 从官方的教程搭配 `ChatGPT` 入门是最好的选择, 这可以确保你快速找到问题的答案
 :::
 
-## 核心特性
-
 首先使用 `vite` 创建一个 `Lit` 项目:
 
 ```bash
@@ -136,6 +134,45 @@ declare global {
 }
 ```
 
+:::tip
+组件声明的标签名必须包含 `-`(连字符), 这确保了与浏览器内置标签不会重复
+:::
+
+## 核心特性
+
+### 生命周期
+`Lit` 扩展了 [`Web Components` 的生命周期](https://developer.mozilla.org/zh-CN/docs/Web/API/Web_components/Using_custom_elements#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%83%E7%B4%A0%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%9B%9E%E8%B0%83), 分为以下三个阶段, 详见 [lifecycle](https://lit.dev/docs/components/lifecycle/)
+
+1. 触发更新
+
+当 **响应式属性值更新** / **调用 `requestUpdate()`** 时触发, `Lit` 会触发异步更新, 即 **捕获多个属性更改并体现到一个 `update` 中**
+![](./assets/images/lit-lifecycle-change.jpg)
+![](./assets/images/lit-lifecycle-change-schedule.jpg)
+
+2. 执行更新
+
+此时可以更新属性值, 更新后并不会触发重新 `update`
+![](./assets/images/lit-lifecycle-update.jpg)
+
+3. 完成更新
+![](./assets/images/lit-lifecycle-updated.jpg)
+
+| 生命周期函数                                                                | 继承自 `HTMLElement` | 描述                                                                                                                                                     | 执行方式 | 常用                                         |
+| --------------------------------------------------------------------------- | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------------------------------------------- |
+| `connectedCallback`                                                         | ✅                    | 当元素被添加到文档中时调用                                                                                                                               | 声明     | ✅                                            |
+| `disconnectedCallback`                                                      | ✅                    | 当元素从文档中移除时调用                                                                                                                                 | 声明     | ✅                                            |
+| `adoptedCallback`                                                           | ✅                    | 当元素被移动到新的文档时调用                                                                                                                             | 声明     |                                              |
+| `attributeChangedCallback`                                                  | ✅                    | 当元素上的属性值发生变化时调用                                                                                                                           | 声明     |                                              |
+| [hasChanged](https://lit.dev/docs/components/properties/#haschanged)        |                      | 在设置响应式属性时隐式调用(或 `@property` 中声明)，用于 **检查并决定是否触发更新**                                                                       | 声明     |
+| [requestUpdate](https://lit.dev/docs/components/lifecycle/#requestUpdate)   |                      | 调用 `requestUpdate()` 来安排显式更新。一般 **用于与属性无关的内容发生更改时更新和呈现元素**                                                             | **调用** | ✅                                            |
+| [shouldUpdate](https://lit.dev/docs/components/lifecycle/#shouldupdate)     |                      | 在更新开始前调用，用于 **决定是否需要执行更新**                                                                                                          | 声明     | [✅](https://lit.dev/tutorials/reactivity/#4) |
+| [willUpdate](https://lit.dev/docs/components/lifecycle/#willupdate)         |                      | 在 `update()` 之前调用以 **计算 / 修改 更新期间所需的值**                                                                                                | 声明     | [✅](https://lit.dev/tutorials/reactivity/#5) |
+| [update](https://lit.dev/docs/components/lifecycle/#update)                 |                      | 调用以更新组件的 `DOM`                                                                                                                                   | 声明     |                                              |
+| [render](https://lit.dev/docs/components/lifecycle/#render)                 |                      | **由 `update()` 调用**                                                                                                                                   | 声明     |                                              |
+| [firstUpdated](https://lit.dev/docs/components/lifecycle/#firstupdated)     |                      | 在组件的 `DOM` **第一次更新后调用**                                                                                                                      | 声明     |                                              |
+| [updated](https://lit.dev/docs/components/lifecycle/#updated)               |                      | 每当组件的更新完成并且元素的 `DOM` 已更新和呈现时调用                                                                                                    | 声明     | [✅](https://lit.dev/tutorials/reactivity/#6) |
+| [updateComplete](https://lit.dev/docs/components/lifecycle/#updatecomplete) |                      | 值为 `Promise<boolean>`, 表示组件是否完成更新, 可通过定义 [getUpdateComplete()](https://lit.dev/docs/components/lifecycle/#getUpdateComplete) 修改其行为 | **调用** |                                              |
+
 ### attribute & property
 在 [Lit](https://lit.dev) 中有两个很容易混淆的概念: `attribute` 和 `property`:
 
@@ -146,10 +183,28 @@ declare global {
 相比于 `attribute`, `property` 可以接受任意类型的值, 而 `attribute` 只能接受字符串类型
 :::
 
-更多配置参数可参考:
-- [property options](https://lit.dev/docs/components/properties/#property-options)
+## 常用特性
+### classMap
+```typescript
+import { css, html, LitElement } from 'lit';
+import { customElement, property, state } from 'lit/decorators.js';
+import { classMap } from 'lit/directives/class-map.js';
+
+@customElement('my-component')
+export class MyComponent extends LitElements {
+  // ...
+  @state() private playDirection: -1 | 1 = 1;
+  render() {
+    return html`<div class="${classMap({ backwards: this.playDirection === -1 })}"></div>`
+  }
+}
+```
+
+### repeat
+参考教程 [working with lists](https://lit.dev/tutorials/working-with-lists/#6)
 
 ## 参考
 - [Lit](https://lit.dev)
 - [web components](https://developer.mozilla.org/zh-CN/docs/Web/API/Web_components)
 - [caniuse Custom Elements](https://caniuse.com/?search=web%20components)
+- [Web Components-LitElement实践](https://juejin.cn/post/7104055306396631076)
