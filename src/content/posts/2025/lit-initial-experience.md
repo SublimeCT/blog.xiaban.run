@@ -1,6 +1,6 @@
 ---
 title: Lit 初体验
-published: 2025-02-20
+published: 2025-02-25
 description: 'Lit 是一个由 Google 开发的基于 web components 的库, 依托 web components 计数, 可以在任意前端项目中使用(vue / react / angular / ...)'
 image: './assets/images/lit-logo.png'
 tags: [
@@ -10,7 +10,7 @@ tags: [
   'LitElement'
 ]
 category: '技术'
-draft: true
+draft: false
 lang: 'zh-CN'
 ---
 
