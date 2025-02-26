@@ -403,6 +403,11 @@ customElements.define('my-component', MyComponent)
 <iframe width="100%" height="200" src="/static-demos/web-components-shadow-dom-slot.html" title="web-components-shadow-dom-css" frameborder="0"></iframe>
 
 ```html
+<style>
+  h2 {
+    text-decoration-line: overline;
+  }
+</style>
 <template id="my-title">
   <style>
     header {
@@ -435,6 +440,10 @@ class MyTitle extends HTMLElement {
 }
 customElements.define('my-title', MyTitle)
 ```
+
+:::tip
+这里的 `<h2 slot="title">` 即带有组件内的红色样式, 也有组件外部的下划线样式, 可见 `slot` 元素与 `Shadow DOM` 内部元素的不同点: **`slot` 元素(插槽) 是可以继承外部样式的**
+:::
 
 ## 局限性
 - **生态孱弱, 发展缓慢**, 相比 vue / react, `web components` 显然在生态上更加落后
