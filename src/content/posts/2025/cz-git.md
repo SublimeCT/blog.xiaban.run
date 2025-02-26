@@ -45,6 +45,7 @@ pnpm i -D cz-git @commitlint/{cli,config-conventional} # 在项目中安装 cz-g
 import type { UserConfig } from 'cz-git'
 
 const config: UserConfig = {
+	extends: ['@commitlint/config-conventional'],
   prompt: {
       alias: { fd: 'docs: fix typos' },
       messages: {

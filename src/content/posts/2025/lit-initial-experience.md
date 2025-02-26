@@ -91,7 +91,7 @@ Scaffolding project in /Users/xxx/projects/lit-demo...
 
 Done. Now run:
 
-  cd hyosan-chat
+  cd lit-demo
   pnpm install
   pnpm run dev
 
