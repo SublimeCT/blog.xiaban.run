@@ -405,7 +405,7 @@ customElements.define('my-component', MyComponent)
 ```html
 <style>
   h2 {
-    text-decoration-line: overline;
+    text-decoration-line: underline;
   }
 </style>
 <template id="my-title">
