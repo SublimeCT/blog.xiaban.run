@@ -7,14 +7,17 @@ tags: [
   'Lit',
   'AI',
   'Web Components',
-  'chat'
+  'chat',
+  'biome',
+  'simple-git-hooks',
+  'shoelace',
 ]
 category: '教程'
 draft: false 
 lang: 'zh-CN'
 ---
 
-本文将介绍如何使用 `vite` 创建并初始化一个 `Lit` 项目
+本篇将介绍如何使用 `vite` 创建并初始化一个 `Lit` 项目
 
 ## 前言
 此系列文章仅作为项目搭建过程的记录, 可能会忽略大量细节, 并且可能中道崩殂, 仅作为学习参考;
