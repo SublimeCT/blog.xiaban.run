@@ -19,6 +19,11 @@ lang: 'zh-CN'
 
 本篇将介绍如何使用 `vite` 创建并初始化一个 [Lit](https://lit.dev) + [shoelace](https://shoelace.style/) 项目
 
+## 目录
+1. [使用 Lit 创建一个 AI 对话组件库 01 搭建篇](../hyosan-chat-01-create/)
+2. [使用 Lit 创建一个 AI 对话组件库 02 Prompts 篇](../hyosan-chat-02-prompts/)
+3. [使用 Lit 创建一个 AI 对话组件库 03 可行性验证 篇](../hyosan-chat-03-feasibility/)
+
 ## 前言
 此系列文章仅作为项目搭建过程的记录, 可能会忽略大量细节, 并且可能中道崩殂, 仅作为学习参考;
 

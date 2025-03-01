@@ -19,6 +19,11 @@ lang: 'zh-CN'
 
 本文将介绍组件库在打包发布后, 在实际的项目中使用是否可行，以及如何进行验证
 
+## 目录
+1. [使用 Lit 创建一个 AI 对话组件库 01 搭建篇](../hyosan-chat-01-create/)
+2. [使用 Lit 创建一个 AI 对话组件库 02 Prompts 篇](../hyosan-chat-02-prompts/)
+3. [使用 Lit 创建一个 AI 对话组件库 03 可行性验证 篇](../hyosan-chat-03-feasibility/)
+
 ## 为什么要验证可行性
 当我们打算使用一项新技术或新的库时, **最先要做的就是验证可行性**; 因为对于新的外部依赖, 我们无法确定是否符合预期, 以及是否会带来新的问题, 进行一次最小规模的验证, 可以 **尽早的暴露问题**
 
@@ -154,7 +159,7 @@ lsd --tree dist/
 | `lib.d.ts`                    | 组件库的入口文件             |
 | `vite.svg`                    | `vite logo`                  |
 
-- 其中 `vite.svg` 不应该出现在 `dist` 目录中, 因为我们将其删除
+- 其中 `vite.svg` 不应该出现在 `dist` 目录中, 因此我们将其删除
 ```bash
 rm public/vite.svg
 ```
@@ -268,10 +273,28 @@ export default defineConfig({
 
 ![](./assets/images/vite-project-import-hyosan-chat-success.png)
 
-再次查看页面, 组件正常渲染, 但在我们现在依然有几个需要解决的问题:
+再次查看页面, 组件正常渲染, 接下来我们测试一下 `v-model` 是否可用:
+
+```diff
++  <input v-model="message" />
+-  <hyosan-chat></hyosan-chat>
++  <hyosan-chat :message="message"></hyosan-chat>
+```
+
+```diff
++ const message = ref('message')
+```
+
+![](./assets/images/vite-project-import-hyosan-chat-v-model.png)
+
+在 `input` 中修改 `message`, 页面中的 `hyosan-chat` 组件也会同步修改
+
+---
+
+看起来一切正常! 🎉 但在我们现在依然有几个需要解决的问题:
 
 - 组件的样式现在依然使用的是 `<link>` `cdn` 的方式实现, 但我们的用户使用环境可能是内网, 无法访问 `cdn` 的资源, 因此我们需要优化引入方式, 改为 **在组件库中 `export` `shoelace` 的样式**
-- `vscode` 中的 `HelloWorld.vue` 中编写 `<hyosan-chat>` 时, 没有关于 `hyosan-chat` 组件的类型提示(`props` / `events`), 也就是 `vscode` 无法识别 `hyosan-chat` 组件的类型; 得益于 `vue` 对自定义组件的重视, 我们可以 **生成类型定义文件对 `vue GlobalComponents` 进行扩展**, 这里我们可以使用一些第三方库([custom-element-vuejs-integration](https://www.npmjs.com/package/custom-element-vuejs-integration)) 来实现, 详见 [非 Vue Web Components 和 TypeScript](https://cn.vuejs.org/guide/extras/web-components.html#non-vue-web-components-and-typescript)
+- `vscode` 中的 `HelloWorld.vue` 中编写 `<hyosan-chat>` 时, 没有关于 `hyosan-chat` 组件的类型提示(`props` / `events`), 也就是 `vscode` 无法识别 `hyosan-chat` 组件的类型; 得益于 `vue` 对自定义组件的支持, 我们可以 **生成类型定义文件对 `vue GlobalComponents` 进行扩展**, 这里我们可以使用一些第三方库([custom-element-vuejs-integration](https://www.npmjs.com/package/custom-element-vuejs-integration)) 来实现, 详见 [非 Vue Web Components 和 TypeScript](https://cn.vuejs.org/guide/extras/web-components.html#non-vue-web-components-and-typescript)
 - 组件库没有 **提供多语言支持**, 虽然 `shoelace` 提供了 [本地化](https://shoelace.style/getting-started/localization) 和 [语言包文件](https://github.com/shoelace-style/shoelace/tree/current/src/translations)
 
 这些问题我们将在后续章节中一一解决
