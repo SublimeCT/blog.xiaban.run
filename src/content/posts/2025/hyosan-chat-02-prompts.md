@@ -1,6 +1,6 @@
 ---
 title: 使用 Lit 创建一个 AI 对话组件库 02 Prompts 篇
-published: 2025-02-26
+published: 2025-02-27
 description: '本文将介绍如何构建开发过程中与 AI 对话所需的 prompts'
 image: './assets/images/hyosan-chat-icon.png'
 tags: [

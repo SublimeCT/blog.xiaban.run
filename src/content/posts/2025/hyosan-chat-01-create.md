@@ -17,7 +17,7 @@ draft: false
 lang: 'zh-CN'
 ---
 
-本篇将介绍如何使用 `vite` 创建并初始化一个 `Lit` 项目
+本篇将介绍如何使用 `vite` 创建并初始化一个 [Lit](https://lit.dev) + [shoelace](https://shoelace.style/) 项目
 
 ## 前言
 此系列文章仅作为项目搭建过程的记录, 可能会忽略大量细节, 并且可能中道崩殂, 仅作为学习参考;
@@ -201,6 +201,22 @@ pnpm i @shoelace-style/shoelace
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + Lit + TS</title>
+
+    <!-- ⚠️ 这里直接按照官方文档使用 link cdn 标签引入了样式, 用来实现 主题切换 -->
+    <!-- ⚠️ 切换功能会在后续章节中实现, 实现方式暂未确定 -->
+
+    <link
+      rel="stylesheet"
+      media="(prefers-color-scheme:light)"
+      href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.0/cdn/themes/light.css"
+    />
+    <link
+      rel="stylesheet"
+      media="(prefers-color-scheme:dark)"
+      href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.0/cdn/themes/dark.css"
+      onload="document.documentElement.classList.add('sl-theme-dark');"
+    />
+
     <link rel="stylesheet" href="./src/index.css" />
     <script type="module" src="/src/main.ts"></script>
   </head>
@@ -211,6 +227,10 @@ pnpm i @shoelace-style/shoelace
   </body>
 </html>
 ```
+
+:::tip
+在代码中我们使用了最简单的 `<link>` 方式来引入 `shoelace` 样式, 在后续章节中我们会将其改为其他方式引入
+:::
 
 `src/main.ts`:
 ```typescript
