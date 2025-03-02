@@ -1,5 +1,5 @@
 ---
-title: 使用 Lit 创建一个 AI 对话组件库 04 组件库探索完善 篇
+title: 使用 Lit 创建一个 AI 对话组件库 04 国际化 篇
 published: 2025-03-02
 description: '当我们将组件库公开发布后, 可以被任何国家任何人使用, 我们除了要有完善可靠的功能, 还要考虑诸如 国际化 / ts 类型定义 / 主题 等可以提升用户体验的东西'
 image: './assets/images/hyosan-chat-icon.png'
@@ -11,14 +11,12 @@ tags: [
   'lib',
   'component library',
   'vue',
-  'theme',
   'i18n',
   'ts',
   'shoelace',
-  'dts'
 ]
 category: '教程'
-draft: true 
+draft: false 
 lang: 'zh-CN'
 ---
 
@@ -28,7 +26,7 @@ lang: 'zh-CN'
 1. [使用 Lit 创建一个 AI 对话组件库 01 搭建篇](../hyosan-chat-01-create/)
 2. [使用 Lit 创建一个 AI 对话组件库 02 Prompts 篇](../hyosan-chat-02-prompts/)
 3. [使用 Lit 创建一个 AI 对话组件库 03 可行性验证 篇](../hyosan-chat-03-feasibility/)
-4. [使用 Lit 创建一个 AI 对话组件库 04 组件库探索完善 篇](../hyosan-chat-04-lib/)
+4. [使用 Lit 创建一个 AI 对话组件库 04 国际化 篇](../hyosan-chat-04-i18n/)
 
 ## 前言
 在 [使用 Lit 创建一个 AI 对话组件库 03 可行性验证 篇](../hyosan-chat-03-feasibility/) 中我们发现了组件库存在以下问题:
