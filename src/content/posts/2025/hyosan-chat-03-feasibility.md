@@ -254,7 +254,7 @@ export default defineConfig({
 
 ![](./assets/images/vite-project-import-hyosan-chat-missing-sheets.png)
 
-添加 `isCustomElement` 后, 组件渲染出来了, 但是样式没有, 这是因为我们在搭建项目引入 `shoelace` 时, 使用最简单的 `<link>` `cdn URL` 的方式引入了 `shoelace` 的样式, 在新创建的项目中并没有这个 `<link>`, 我们为了进行验证, 先引入 `<link>`, 在后文我们会优化引入方式
+添加 `isCustomElement` 后, 组件渲染出来了, 但是样式没有, 这是因为我们在搭建项目引入 `shoelace` 时, 使用最简单的 `<link>` `cdn URL` 的方式引入了 `shoelace` 的样式, 在新创建的项目中并没有这个 `<link>`, 我们为了进行验证, 先引入 `<link>`, 在后续文章中我们会优化引入方式
 
 `index.html`:
 ```diff
