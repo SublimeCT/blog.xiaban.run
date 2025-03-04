@@ -4,6 +4,7 @@ published: 2025-02-26
 description: '最近学习了一下 Lit / Web Components, 尝试使用 Lit 创建一个 AI 对话组件库'
 image: './assets/images/hyosan-chat-icon.png'
 tags: [
+  'hyosan-chat',
   'Lit',
   'AI',
   'Web Components',

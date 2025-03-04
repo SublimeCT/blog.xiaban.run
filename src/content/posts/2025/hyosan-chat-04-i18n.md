@@ -4,6 +4,7 @@ published: 2025-03-02
 description: '当我们将组件库公开发布后, 可以被任何国家任何人使用, 我们除了要有完善可靠的功能, 还要考虑诸如 国际化 / ts 类型定义 / 主题 等可以提升用户体验的东西'
 image: './assets/images/hyosan-chat-icon.png'
 tags: [
+  'hyosan-chat',
   'Lit',
   'vite',
   'Web Components',

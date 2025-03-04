@@ -4,6 +4,7 @@ published: 2025-03-03
 description: '前面几章花了太多时间搭建和配置项目, 从本章开始我们先写点功能, 就从左侧的对话列表开始'
 image: './assets/images/hyosan-chat-icon.png'
 tags: [
+  'hyosan-chat',
   'Lit',
   'vite',
   'Web Components',

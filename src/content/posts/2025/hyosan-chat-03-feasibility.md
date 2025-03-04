@@ -4,6 +4,7 @@ published: 2025-03-01
 description: '本文将介绍组件库在打包发布后, 在实际的项目中使用是否可行，以及如何进行验证'
 image: './assets/images/hyosan-chat-icon.png'
 tags: [
+  'hyosan-chat',
   'Lit',
   'vite',
   'Web Components',

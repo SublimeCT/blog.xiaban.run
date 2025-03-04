@@ -4,6 +4,7 @@ published: 2025-02-27
 description: '本文将介绍如何构建开发过程中与 AI 对话所需的 prompts'
 image: './assets/images/hyosan-chat-icon.png'
 tags: [
+  'hyosan-chat',
   'Lit',
   'AI',
   'Web Components',
