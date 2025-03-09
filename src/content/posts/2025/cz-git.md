@@ -223,6 +223,142 @@ feat: 更新 TypeScript 的默认格式化工具为 Prettier，并调整 commitl
 
 完结撒花 ❤️
 
+## 20250-03-09 更新
+commitlint 对于 `ts` 文件的支持不太行 😡, 所以将文件名改回了 `commitlint.config.mjs`, 又加入了自定义的 `tag` `WIP`, 完整代码如下:
+
+```typescript
+// import { RuleConfigSeverity } from 'commitlint'
+import { defineConfig } from 'cz-git'
+
+const config = defineConfig({
+	extends: ['@commitlint/config-conventional'],
+	rules: {
+		'type-enum': [
+			2,
+			'always',
+			[
+				'build',
+				'chore',
+				'ci',
+				'docs',
+				'feat',
+				'fix',
+				'perf',
+				'refactor',
+				'revert',
+				'style',
+				'test',
+				'WIP',
+			],
+		],
+		'type-case': [0], // 禁用类型大小写检查
+	},
+	prompt: {
+		alias: { fd: 'docs: fix typos' },
+		messages: {
+			type: '选择你要提交的类型 :',
+			scope: '选择一个提交范围（可选）:',
+			customScope: '请输入自定义的提交范围 :',
+			subject: '填写简短精炼的变更描述 :\n',
+			body: '填写更加详细的变更描述（可选）。使用 "|" 换行 :\n',
+			breaking: '列举非兼容性重大的变更（可选）。使用 "|" 换行 :\n',
+			footerPrefixesSelect: '选择关联issue前缀（可选）:',
+			customFooterPrefix: '输入自定义issue前缀 :',
+			footer: '列举关联issue (可选) 例如: #31, #I3244 :\n',
+			confirmCommit: '是否提交或修改commit ?',
+		},
+		types: [
+			{ value: 'feat', name: 'feat:     新增功能 | A new feature' },
+			{ value: 'fix', name: 'fix:      修复缺陷 | A bug fix' },
+			{ value: 'WIP', name: 'WIP:      暂未完成 | Not yet completed' },
+			{
+				value: 'docs',
+				name: 'docs:     文档更新 | Documentation only changes',
+			},
+			{
+				value: 'style',
+				name: 'style:    代码格式 | Changes that do not affect the meaning of the code',
+			},
+			{
+				value: 'refactor',
+				name: 'refactor: 代码重构 | A code change that neither fixes a bug nor adds a feature',
+			},
+			{
+				value: 'perf',
+				name: 'perf:     性能提升 | A code change that improves performance',
+			},
+			{
+				value: 'test',
+				name: 'test:     测试相关 | Adding missing tests or correcting existing tests',
+			},
+			{
+				value: 'build',
+				name: 'build:    构建相关 | Changes that affect the build system or external dependencies',
+			},
+			{
+				value: 'ci',
+				name: 'ci:       持续集成 | Changes to our CI configuration files and scripts',
+			},
+			{ value: 'revert', name: 'revert:   回退代码 | Revert to a commit' },
+			{
+				value: 'chore',
+				name: 'chore:    其他修改 | Other changes that do not modify src or test files',
+			},
+		],
+		useEmoji: false,
+		emojiAlign: 'center',
+		useAI: true,
+		aiNumber: 6,
+		aiModel: 'gpt-4o-mini',
+		aiQuestionCB({ maxSubjectLength, diff }) {
+			return `用完整句子为以下 Git diff 代码写一个有见解并简洁的 Git 中文提交消息，不加任何前缀，并且内容不能超过 ${maxSubjectLength} 个字符: \`\`\`diff\n${diff}\n\`\`\``
+		},
+		themeColorCode: '',
+		scopes: [],
+		allowCustomScopes: true,
+		allowEmptyScopes: true,
+		customScopesAlign: 'bottom',
+		customScopesAlias: 'custom',
+		emptyScopesAlias: 'empty',
+		upperCaseSubject: false,
+		markBreakingChangeMode: false,
+		allowBreakingChanges: ['feat', 'fix'],
+		breaklineNumber: 100,
+		breaklineChar: '|',
+		skipQuestions: [],
+		issuePrefixes: [
+			// 如果使用 gitee 作为开发管理
+			{ value: 'link', name: 'link:     链接 ISSUES 进行中' },
+			{ value: 'closed', name: 'closed:   标记 ISSUES 已完成' },
+		],
+		customIssuePrefixAlign: 'top',
+		emptyIssuePrefixAlias: 'skip',
+		customIssuePrefixAlias: 'custom',
+		allowCustomIssuePrefix: true,
+		allowEmptyIssuePrefix: true,
+		confirmColorize: true,
+		scopeOverrides: undefined,
+		defaultBody: '',
+		defaultIssues: '',
+		defaultScope: '',
+		defaultSubject: '',
+	},
+})
+
+export default config
+```
+
+然后将 `package.json` 中的 `scripts` 修改为 `"cz": "czg"`:
+
+```diff
+- "cz": "cross-env NODE_OPTIONS='--experimental-transform-types --disable-warning ExperimentalWarning' czg"
++ "cz": "czg"
+```
+
+```bash
+pnpm remove cross-env
+```
+
 ## 参考
 - [cz-git](https://cz-git.qbb.sh/zh/guide/)
 - [commitizen](https://github.com/commitizen/cz-cli)
