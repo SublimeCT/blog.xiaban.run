@@ -50,8 +50,8 @@ lang: 'zh-CN'
 :::TIP
 其中 `EMAIL_HOST` 是我增加的邮箱 SMTP 服务器地址参数, 在原仓库中是直接从邮箱字符串中截取的, 因为我用的是 [阿里邮箱网页端](https://qiye.aliyun.com), 所以 SMTP 服务器地址为 `smtp.qiye.aliyun.com`, 需要手动修改, 关于 **免费域名邮箱** / **使用阿里邮箱发送文件** 可参考我的这些文章:
 
-- [服务器请求阿里邮箱服务器发送邮件](http://localhost:4321/posts/2025/server-mail/)
-- [阿里云配置域名邮箱](http://localhost:4321/posts/2025/configure-domain-name-mailbox/)
+- [服务器请求阿里邮箱服务器发送邮件](../server-mail/)
+- [阿里云配置域名邮箱](../configure-domain-name-mailbox/)
 :::
 
 3. 仓库 -> `Actions` -> `Auto`, 检查 `Workflows` 并启用。
@@ -82,6 +82,95 @@ on:
 在执行完毕后, 我们将收到一封通知邮件:
 
 ![](./assets/images/juejin-signin-email.jpg)
+
+## 部署到服务器
+```bash
+# 使用 rsync 将源码上传到服务器
+# 由于阿里云服务器拉取不了 github 仓库代码, 所以只能本地上传
+rsync -avz juejin-helper admin@47.69.204.83:/home/admin/projects/
+```
+
+```bash
+cd projects/juejin-helper && pnpm i
+cd workflows && pnpm i
+cd ../packages/juejin-helper && pnpm i
+```
+
+这里我们修改一下环境变量名, 增加 `JUEJIN_` 前缀:
+
+```javascript
+const env = process.env || {};
+
+module.exports = {
+  /* 掘金Cookie */
+  COOKIE: env.JUEJIN_COOKIE || env.COOKIE,
+  /* 多用户掘金Cookie, 当有1名以上用户时填写, 支持同时最多可配置5名用户 */
+  COOKIE_2: env.COOKIE_2,
+  COOKIE_3: env.COOKIE_3,
+  COOKIE_4: env.COOKIE_4,
+  COOKIE_5: env.COOKIE_5,
+  /**
+   * 邮箱配置
+   * user 发件人邮箱, pass, 发件人密码, to收件人
+   */
+  EMAIL_USER: env.JUEJIN_EMAIL_USER || env.EMAIL_USER,
+  EMAIL_PASS: env.JUEJIN_EMAIL_PASS || env.EMAIL_PASS,
+  EMAIL_TO: env.JUEJIN_EMAIL_TO || env.EMAIL_TO,
+  EMAIL_HOST: env.JUEJIN_EMAIL_HOST || env.EMAIL_HOST,
+  /**
+   * 钉钉配置
+   * https://open.dingtalk.com/document/robots/custom-robot-access
+   */
+  DINGDING_WEBHOOK: env.DINGDING_WEBHOOK,
+  /**
+   * PushPlus配置
+   * http://www.pushplus.plus/doc/guide/openApi.html
+   */
+  PUSHPLUS_TOKEN: env.PUSHPLUS_TOKEN,
+  /**
+   * 企业微信机器人配置
+   * https://developer.work.weixin.qq.com/document/path/91770
+   */
+  WEIXIN_WEBHOOK: env.WEIXIN_WEBHOOK,
+  /**
+   * server酱推送key
+   * https://sct.ftqq.com/sendkey
+   */
+  SERVERPUSHKEY: env.SERVERPUSHKEY,
+  /**
+   * 飞书配置
+   */
+  FEISHU_WEBHOOK: env.FEISHU_WEBHOOK
+};
+```
+
+然后设置环境变量:
+```bash
+vim ~/.profile
+
+# juejin-helper
+export JUEJIN_COOKIE="your-cookie"
+export JUEJIN_EMAIL_USER="no-reply@example.com"
+export JUEJIN_EMAIL_PASS="your-email-password"
+export JUEJIN_EMAIL_TO="your-email@qq.com"
+export JUEJIN_EMAIL_HOST="smtp.qiye.aliyun.com"
+```
+
+最后我们通过 `crontab -e` 添加一下这个定时任务:
+
+```bash
+crontab -e
+
+# juejin-helper task
+15 8 * * * bash -l -c 'source /home/admin/.profile && cd /home/admin/projects/juejin-helper/workflow && pnpm run checkin'
+```
+
+这会在每天 `08:15` 执行签到任务
+
+```bash
+# 手动执行测试一下
+cd /home/admin/projects/juejin-helper/workflow && pnpm run checkin
+```
 
 ## 参考
 - [juejin-helper](https://github.com/iDerekLi/juejin-helper)

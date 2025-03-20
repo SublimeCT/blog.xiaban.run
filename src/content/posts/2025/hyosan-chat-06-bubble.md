@@ -1,7 +1,7 @@
 ---
 title: 使用 Lit 创建一个 AI 对话组件库 06 补录总结 篇
 published: 2025-03-18
-description: '举例上一章发布过去了半个月, 没错, 这期间实在是太忙了, 所以这半个月的开发过程并没有做记录'
+description: '距离上一章发布过去了半个月, 没错, 这期间实在是太忙了, 所以这半个月的开发过程并没有做记录'
 image: './assets/images/hyosan-chat-icon.png'
 tags: [
   'hyosan-chat',
