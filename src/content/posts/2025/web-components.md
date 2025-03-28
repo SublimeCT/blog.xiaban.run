@@ -459,6 +459,7 @@ customElements.define('my-title', MyTitle)
 :::
 
 ## 生态
+> 可在 [webcomponents.org](https://www.webcomponents.org/) 搜索更多 `web components` 组件
 
 ### 基础框架
 - [Lit](https://lit.dev)
@@ -467,6 +468,7 @@ customElements.define('my-title', MyTitle)
 ### UI 组件库
 - [💻 shoelace](https://shoelace.style/)
 - [📱 quark-design](https://github.com/hellof2e/quark-design)
+- [更多组件库 ...](https://open-wc.org/guides/community/component-libraries/)
 
 ## vue & web components
 根据 [vue 官方文档](https://cn.vuejs.org/guide/extras/web-components.html#web-components-and-typescript) 对于 `web components` 的描述:
