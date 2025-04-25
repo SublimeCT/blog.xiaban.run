@@ -72,7 +72,8 @@ lang: 'zh-CN'
 充满意大利风情的雕像, 不明白为啥这么多人围着看
 
 ### 游泳大爷
-<video controls preload="none" width="100%" src="/static-videos/tianjin-swimming.MOV"></video>
+
+<video controls preload="none" width="100%" src="/static-videos/tianjin-swimming.MOV" type="video/quicktime"></video>
 
 点击播放 ▶️, 据说冬天也会来游泳 🏊🏻
 

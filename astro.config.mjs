@@ -107,6 +107,7 @@ export default defineConfig({
     ],
   },
   vite: {
+    assetsInclude: ['**/*.{mov,MOV}'],
     build: {
       rollupOptions: {
         onwarn(warning, warn) {
