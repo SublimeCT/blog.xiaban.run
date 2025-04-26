@@ -1,7 +1,7 @@
 ---
-title: 2025 天津之行
+title: 2025 天津之行(多图)
 published: 2025-04-25
-description: '2025 年春末, 我来到了为数不多的可以周五晚 🚄 到达的大城市'
+description: '2025 年春末, 我利用周末的时间, 去了一趟天津'
 image: './assets/images/tianjin-century-clock.jpg'
 tags: [
   '天津',
@@ -31,6 +31,8 @@ lang: 'zh-CN'
 
 ![](./assets/images/tianjin-travel-guide.jpeg)
 
+实际走下来, 最值得去的是天津博物馆和意风区
+
 ## 启程
 在周五晚从我所在的城市坐 🚄 出发, 可以到达天津, 虽然要中转, 但 3h 就能到, 所以其实天津是很近的
 
@@ -56,10 +58,12 @@ lang: 'zh-CN'
 
 大光明桥夜景
 
-### 意大利风情区
+天津是沿海河发展的, 所以桥特别多, 而且建造的非常精致, 当年这里是 9 国租界, 如今这里是我国直辖市, 北方第二城
+
+### 意式风情区
 ![](./assets/images/tianjin-Italian-style-area-crossing.jpg)
 
-意大利风情区 🇮🇹 的一个路口, 商业化非常足, 路口处有天津工业展览馆, 电动三轮车为游客提供讲解服务, 这里可以坐三轮车的, 但我更喜欢步行 🚶
+意式风情区 🇮🇹 的一个路口, 商业化非常足, 路口处有天津工业展览馆, 电动三轮车为游客提供讲解服务, 这里可以坐三轮车的, 但我更喜欢步行 🚶
 
 这里的商业化比较严重, 虽然有很多独特的建筑, 但我对建筑不是很感兴趣, 再放几张有意思的照片:
 
@@ -73,16 +77,21 @@ lang: 'zh-CN'
 
 ### 游泳大爷
 
-<video controls preload="none" width="100%" src="/static-videos/tianjin-swimming.MOV" type="video/quicktime"></video>
+<video controls width="100%" src="/static-videos/tianjin-swimming.MOV" type="video/quicktime"></video>
 
 点击播放 ▶️, 据说冬天也会来游泳 🏊🏻
 
 ## 海港公园
-海港公园是十年前大爆炸的核心区域, 这里不再描写当年 [大爆炸事故](https://baike.baidu.com/item/8%C2%B712%E5%A4%A9%E6%B4%A5%E6%BB%A8%E6%B5%B7%E6%96%B0%E5%8C%BA%E7%88%86%E7%82%B8%E4%BA%8B%E6%95%85/18370029) 的惨烈, 只放一张网图来对比过去和现在:
+海港公园是十年前大爆炸的核心区域, 互联网上几乎没有关于这个公园的介绍, 我为什么要来这里呢? 因为前段时间刷到了这个视频:
+
+<video controls width="100%" src="/static-videos/tianjin-firefighter.mp4"></video>
+
+这里不再描写当年 [大爆炸事故](https://baike.baidu.com/item/8%C2%B712%E5%A4%A9%E6%B4%A5%E6%BB%A8%E6%B5%B7%E6%96%B0%E5%8C%BA%E7%88%86%E7%82%B8%E4%BA%8B%E6%95%85/18370029) 的惨烈, 只放一张网图来对比过去和现在:
+
 
 ![](./assets/images/tianjin-port-diff.jpeg)
 
-`2015` 年我还在上大学, 依稀记得 `QQ` 群里曾经传过一些爆炸的视频
+`2015` 年我还在上大学, 依稀记得 `QQ` 群里曾经传过一些爆炸的视频, 问了几个人都说不记得这件事了, 果然 **时间是一剂良药**, 互联网也是没有记忆的
 
 现在的公园:
 
@@ -119,15 +128,23 @@ lang: 'zh-CN'
 
 ![](./assets/images/tianjin-museum2.jpg)
 
-镇馆之宝: 翡翠蝈蝈白菜, 看起来相当漂亮 👍🏻
+镇馆之宝: [翡翠蝈蝈白菜](https://www.tjbwg.com/cn/collectionInfo.aspx?Id=2630), 看起来相当漂亮 👍🏻
 
 ![](./assets/images/tianjin-museum3.jpg)
 
-镇馆之宝: 太保鼎, 好多人拍照
+镇馆之宝: [太保鼎](https://www.tjbwg.com/cn/collectionInfo.aspx?Id=2345), 鼎身高大、造型厚重、比例匀称, 铸造与西周时期, 是商周青铜器的典型代表
 
 ![](./assets/images/tianjin-museum4.jpg)
+
+[翡翠缠枝菊花纹环耳扁盖瓶](https://www.tjbwg.com/cn/collectionInfo.aspx?Id=2673), 此瓶由一块大的翡翠料抛开制成一对, 淡翠绿色，间少许淡粉色，色泽均匀柔和，美丽晶莹。此瓶另一看点是工艺高超，雕琢精湛。盖有桃形钮，盖身及瓶两侧镂雕缠枝菊花纹，颈肩镂空花耳上各套一活环，瓶身光素，抛光匀细，椭圆圈足，足下附座，上阴线刻兽面纹。尤其是对花、叶纹饰采用镂雕技法，雕琢更为精细，颇具阿拉伯地域风格，这与翡翠晶莹璀璨的质感交相辉映，为这对高贵典雅的大瓶又增添了一种灵动之感
+
+翡翠以其深稳凝重、变幻莫测的翠绿色和温润柔美的特性受到举国上下的喜爱，特别是以慈禧为代表的统治阶层的青睐，传说慈禧宁要翡翠饰物而不要金刚石头饰贡品，官员们则投其所好，选上等的翡翠进奉，以求名利，因此翡翠又有“皇家玉”、“玉王”之称。天津博物馆展出的这对翡翠大瓶用料为缅甸翡翠且成对保存至今非常难得。
+
 ![](./assets/images/tianjin-museum5.jpg)
 ![](./assets/images/tianjin-museum6.jpg)
+
+`1860` 年, 英、法、俄强迫清政府签订了《北京条约》, 天津被迫辟为通商口岸; 英国、法国、美国、德国、日本、奥匈帝国、意大利、俄国、比利时等 9 国先后在天津强设了近 15 平方公里的租界地, 相当于天津旧城的8倍。一大批外国冒险家、传教士、富豪纷至沓来，营建洋行、银号、商店、花园、娱乐场、办公楼，开办仓储、航运、进出口贸易，建立医院、学校，盖洋房，造别墅、戏院
+
 ![](./assets/images/tianjin-museum7.jpg)
 ![](./assets/images/tianjin-museum8.jpg)
 ![](./assets/images/tianjin-museum9.jpg)
