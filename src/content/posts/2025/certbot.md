@@ -229,8 +229,8 @@ server {
 其中 `ssl_certificate` 是证书文件路径, `ssl_certificate_key` 是证书私钥文件路径
 
 ```bash
-sudo ln -s /home/admin/.certbot/config/live/example.com /etc/nginx/conf.d/certbotexample.com/
-sudo ln -s /home/admin/.certbot/config/live/all.example.com /etc/nginx/conf.d/certbot/allexample.com
+sudo ln -s /home/admin/.certbot/config/live/example.com /etc/nginx/conf.d/certbot/example.com
+sudo ln -s /home/admin/.certbot/config/live/all.example.com /etc/nginx/conf.d/certbot/all.example.com
 ```
 >[!TIP]
 这里根据实际情况进行配置, 以上路径只是实例
