@@ -28,7 +28,7 @@ lang: 'zh-CN'
 mkdir -p ~/.cherrystudio/bin
 ```
 
-官方只使用 `~/.cherrystudio/bin` 中的 `bun` / `uv` / `uvx`, 而不是全局的 `bun` / `uv` / `uvx`, 这很令人不解, 这里选择手动安装, 下面将介绍如何安装及配置这些依赖
+官方只使用 `~/.cherrystudio/bin` 中的 `bun` / `uv` / `uvx`, 而不是全局的 `bun` / `uv` / `uvx`, 这很令人不解, 这里选择手动全局安装, 然后软连接到 `~/.cherrystudio/bin`, 下面将介绍如何安装及配置这些依赖
 
 ### bun
 > 我是 `MacOS` 和 `fish shell`, 以下命令适用于我的环境, 下文不再赘述; 
@@ -40,12 +40,12 @@ source ~/.config/fish/config.fish # 重新载入环境变量
 sudo ln -s $(which bun) ~/.cherrystudio/bin/bun # 将 bun 软链接到 ~/.cherrystudio/bin/bun
 ```
 
-### nv
+### uv
 > 其他系统安装参考官方页面 [installation - uv](https://docs.astral.sh/uv/getting-started/installation/)
 
 ```bash
 curl -LsSf https://astral.sh/uv/install.sh | sh
-source ~/.config/fish/config.fish # 重新载入环境变量
+source $HOME/.local/bin/env.fish # 重新载入环境变量
 sudo ln -s $(which uv) ~/.cherrystudio/bin/uv
 sudo ln -s $(which uvx) ~/.cherrystudio/bin/uvx
 ```
