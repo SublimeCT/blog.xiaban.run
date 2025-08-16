@@ -1,5 +1,5 @@
 ---
-title: 济你太美, 徐度光阴(多图)
+title: 济你太美, 徐度光阴(超多图)
 published: 2025-07-20
 description: '因工作变动, 我从 6 月份开始前往济宁出差, 开始了一场被无限拉长的工作经历'
 image: './assets/images/jining-kongzi-stone.jpg'
@@ -28,8 +28,8 @@ lang: 'zh-CN'
 - `7` 月初得知: 应该稳了, 可以回来
 - `7` 月初又得知: 双方领导层正在协商, 可以回来
 - `7` 月中旬又得知: `8` 月份就可以回原工作地
-- `8` 月初得知: 正在确认合同细节
-- `8` 月初又得知: 合同还没签
+- `8` 月初得知: 正在确认细节
+- `8` 月初又得知: 还在走流程
 - `8` 中旬得知: 即将返回原工作地
 - `8` 中旬: 返程
 
@@ -48,9 +48,7 @@ lang: 'zh-CN'
 但如今就业环境非常恶劣, 一方面劳动力越来越多, 另一方面就业岗位越来越少, 而且降本增效之风已经蔓延到了各行各业, **我们正在陷入一个挣扎的内卷时代, 在这个内卷旋涡中没有人可以独善其身**
 
 ## 出发
-由于我的行李比较多(一个大件行李, 一个行李箱, 一个电脑包), 所以打算开车去:
-
-<video controls width="100%" src="/static-videos/jining-map.mp4" type="video/quicktime"></video>
+由于我的行李比较多(一个大件行李, 一个行李箱, 一个电脑包), 所以打算开车去
 
 经过 `4` 个多小时最终到达济宁的出租屋(公司提供的宿舍), **这是一个三居室, 但只有一个卧室有空调, 另一个空调在客厅**
 
@@ -372,6 +370,9 @@ lang: 'zh-CN'
 
 图为回龙窝的刘姥姥酸梅汤
 
+![](./assets/images/jining-xuzhou-bread.jpeg)
+
+图为洛馍卷馓子
 
 ![](./assets/images/jining-xuzhou-metro.jpg)
 
@@ -462,6 +463,7 @@ lang: 'zh-CN'
 图为金缕玉衣
 
 ![](./assets/images/jining-xuzhou-mesuem-exhibits12.jpeg)
+![](./assets/images/jining-xuzhou-mesuem-exhibits16.jpeg)
 ![](./assets/images/jining-xuzhou-mesuem-exhibits13.jpeg)
 ![](./assets/images/jining-xuzhou-mesuem-exhibits14.jpeg)
 ![](./assets/images/jining-xuzhou-mesuem-exhibits15.jpeg)
