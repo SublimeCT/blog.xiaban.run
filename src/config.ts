@@ -37,6 +37,10 @@ export const siteConfig: SiteConfig = {
 		//   sizes: '32x32',              // (Optional) Size of the favicon, set only if you have favicons of different sizes
 		// }
 	],
+	clarity: {
+		enable: true, // 是否启用 Microsoft Clarity 分析
+		projectId: "t4sdpeeqch", // Clarity 项目 ID
+	},
 };
 
 export const navBarConfig: NavBarConfig = {

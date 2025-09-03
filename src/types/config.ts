@@ -36,6 +36,11 @@ export type SiteConfig = {
 	};
 
 	favicon: Favicon[];
+
+	clarity: {
+		enable: boolean;
+		projectId: string;
+	};
 };
 
 export type Favicon = {
