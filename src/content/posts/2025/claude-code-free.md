@@ -12,7 +12,7 @@ tags: [
   '免费'
 ]
 category: '教程'
-draft: true 
+draft: false 
 lang: 'zh-CN'
 ---
 
@@ -462,10 +462,19 @@ claude
 按下 `Enter` 创建 `ClAUDE.md`
 
 ## context7 MCP
+<a href="https://context7.com/" target="_blank">context7 MCP</a> 能实时注入最新文档到某 `Claude` 的上下文中, 解决模型知识的滞后性
 
+1. 访问 [Dashboard 页面](https://context7.com/dashboard) 登录并创建 `API Key`
+
+2. 执行命令安装 `context7`
 ```bash
+claude mcp add --transport http context7 https://mcp.context7.com/mcp --header "CONTEXT7_API_KEY: ctx7sk-85354f7e-3e3c-480e-aae2-3875ac9b0444"
 ```
 
+将 `YOUR_API_KEY` 替换为自己的 `API Key`
+
+## vscode 插件
+可以直接在 vscode 应用市场中搜索并安装 `Claude Code` 插件, 点击右上角的 `Claude Code` 图标即可启动
 
 ## 参考
 - [谈谈 AI 编程工具的进化与 Vibe Coding](https://guangzhengli.com/blog/zh/vibe-coding-and-context-coding)
@@ -475,3 +484,4 @@ claude
 - [GLM Coding Lite](https://bigmodel.cn/claude-code?utm_source=bigmodel&utm_medium=link&utm_term=cc&utm_campaign=Platform_Ops&_channel_track_key=i8kwCaos)
 - [接入 Claude Code - GLM](https://docs.bigmodel.cn/cn/guide/develop/claude)
 - [#3166642325](https://github.com/musistudio/claude-code-router/issues/427#issuecomment-3166642325)
+- [context7](https://context7.com/)
