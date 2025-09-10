@@ -1,48 +1,48 @@
 export type FriendLinkItem = {
-    title: string;
-    url: string;
-    avatar: string;
-    desc: string;
+	title: string;
+	url: string;
+	avatar: string;
+	desc: string;
 };
 
 export type FriendLinkSection = {
-    title: string;
-    items: FriendLinkItem[];
+	title: string;
+	items: FriendLinkItem[];
 };
 
 export const friendLinkSections: FriendLinkSection[] = [
-    {
-        title: "🌟 友情博客",
-        items: [
-            {
-                title: "hoppinzq",
-                url: "https://hoppinzq.com/hoppinai/",
-                avatar: "https://hoppinzq.com/zui/static/picture/0.jpg",
-                desc: "这是 zq 的网站",
-            },
-        ],
-    },
-    // {
-    //     title: "🛠️ 实用工具",
-    //     items: [
-    //         {
-    //             title: "图片转Ico",
-    //             url: "https://ico.pljzy.top",
-    //             avatar: "https://ico.pljzy.top/logo.ico",
-    //             desc: "在线png、jpg、jpeg图片转Ico工具",
-    //         },
-    //         {
-    //             title: "文件快递柜",
-    //             url: "https://share.pljzy.top",
-    //             avatar: "https://share.pljzy.top/assets/logo_small.png",
-    //             desc: "FileCodeBox, 文件快递柜, 口令传送箱, 匿名口令分享文本, 文件",
-    //         },
-    //         {
-    //             title: "TXT转电子书工具",
-    //             url: "https://ebook.deali.cn/",
-    //             avatar: "https://ebook.deali.cn/static/favicon.ico",
-    //             desc: "将TXT文本文件转换为EPUB、MOBI、AZW3等电子书格式",
-    //         },
-    //     ],
-    // },
+	{
+		title: "🌟 友情博客",
+		items: [
+			{
+				title: "hoppinzq",
+				url: "https://hoppinzq.com/hoppinai/",
+				avatar: "https://hoppinzq.com/zui/static/picture/0.jpg",
+				desc: "这是 zq 的网站",
+			},
+		],
+	},
+	// {
+	//     title: "🛠️ 实用工具",
+	//     items: [
+	//         {
+	//             title: "图片转Ico",
+	//             url: "https://ico.pljzy.top",
+	//             avatar: "https://ico.pljzy.top/logo.ico",
+	//             desc: "在线png、jpg、jpeg图片转Ico工具",
+	//         },
+	//         {
+	//             title: "文件快递柜",
+	//             url: "https://share.pljzy.top",
+	//             avatar: "https://share.pljzy.top/assets/logo_small.png",
+	//             desc: "FileCodeBox, 文件快递柜, 口令传送箱, 匿名口令分享文本, 文件",
+	//         },
+	//         {
+	//             title: "TXT转电子书工具",
+	//             url: "https://ebook.deali.cn/",
+	//             avatar: "https://ebook.deali.cn/static/favicon.ico",
+	//             desc: "将TXT文本文件转换为EPUB、MOBI、AZW3等电子书格式",
+	//         },
+	//     ],
+	// },
 ];
