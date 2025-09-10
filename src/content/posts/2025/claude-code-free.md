@@ -468,13 +468,46 @@ claude
 
 2. 执行命令安装 `context7`
 ```bash
-claude mcp add --transport http context7 https://mcp.context7.com/mcp --header "CONTEXT7_API_KEY: ctx7sk-85354f7e-3e3c-480e-aae2-3875ac9b0444"
+claude mcp add --transport http context7 https://mcp.context7.com/mcp --header "CONTEXT7_API_KEY: ctx7sk-0iksefjl1-iwe2c-29n4-19nd-sliefoajn11"
 ```
 
 将 `YOUR_API_KEY` 替换为自己的 `API Key`
 
 ## vscode 插件
 可以直接在 vscode 应用市场中搜索并安装 `Claude Code` 插件, 点击右上角的 `Claude Code` 图标即可启动
+
+## ccusage
+`ccusage` 是一个用于统计 `Claude Code` 使用量的工具, 它从 `~/.claude/projects` 目录读取了大模型的对话历史记录, 从而统计每天的 `tokens` 消耗量
+
+1. 安装 ccusage
+```bash
+pnpm i -g ccusage
+```
+
+2. 执行 `ccusage daily` 查看每天的 `tokens` 消耗量
+```bash
+ccusage daily
+
+ WARN  Fetching latest model pricing from LiteLLM...                                                               ccusage 15:18:05
+
+ℹ Loaded pricing for 1491 models                                                                                  ccusage 15:18:05
+
+ ╭──────────────────────────────────────────╮
+ │                                          │
+ │  Claude Code Token Usage Report - Daily  │
+ │                                          │
+ ╰──────────────────────────────────────────╯
+
+┌────────────┬───────────────┬────────────┬───────────┬───────────────┬─────────────┬───────────────┬─────────────┐
+│ Date       │ Models        │      Input │    Output │  Cache Create │  Cache Read │  Total Tokens │  Cost (USD) │
+├────────────┼───────────────┼────────────┼───────────┼───────────────┼─────────────┼───────────────┼─────────────┤
+│ 2025-09-08 │ - sonnet-4    │  1,038,167 │   100,264 │             0 │   6,720,666 │     7,859,097 │       $6.63 │
+├────────────┼───────────────┼────────────┼───────────┼───────────────┼─────────────┼───────────────┼─────────────┤
+│ 2025-09-09 │ - sonnet-4    │  1,319,907 │    73,242 │             0 │  24,117,626 │    25,510,775 │      $12.29 │
+├────────────┼───────────────┼────────────┼───────────┼───────────────┼─────────────┼───────────────┼─────────────┤
+│ Total      │               │  2,358,074 │   173,506 │             0 │  30,838,292 │    33,369,872 │      $18.93 │
+└────────────┴───────────────┴────────────┴───────────┴───────────────┴─────────────┴───────────────┴─────────────┘
+```
 
 ## 参考
 - [谈谈 AI 编程工具的进化与 Vibe Coding](https://guangzhengli.com/blog/zh/vibe-coding-and-context-coding)
