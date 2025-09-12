@@ -17,10 +17,15 @@
 - 网站图标/头像
 
 参考格式：
-- 网站名称：hoppinzq
-- 网站介绍：这是 zq 的网站
-- 网站地址：https://hoppinzq.com/hoppinai/
-- 网站头像：https://hoppinzq.com/zui/static/picture/0.jpg
+
+```javascript
+{
+  title: "Ryan's Blog",
+  url: "https://blog.xiaban.run",
+  avatar: "https://blog.xiaban.run/static-images/avatar.png",
+  desc: "回首向来萧瑟处,归去,也无风雨也无晴",
+}
+```
 
 ---
 

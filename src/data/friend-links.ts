@@ -20,6 +20,12 @@ export const friendLinkSections: FriendLinkSection[] = [
 				avatar: "https://hoppinzq.com/zui/static/picture/0.jpg",
 				desc: "这是 zq 的网站",
 			},
+			{
+				title: "梦辰の小窝",
+				url: "https://mc.mimeng.top/",
+				avatar: "https://avatars.githubusercontent.com/u/98578510",
+				desc: "Eagerly Anticipating Our Reunion",
+			},
 		],
 	},
 	// {
