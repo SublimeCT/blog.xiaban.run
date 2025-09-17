@@ -116,7 +116,7 @@ info: installing component 'rust-std' for 'wasm32-unknown-unknown'
    Compiling wasm-bindgen-macro-support v0.2.100
    Compiling wasm-bindgen-macro v0.2.100
    Compiling console_error_panic_hook v0.1.7
-   Compiling wasm-utils v0.1.0 (/Users/kuidi/projects/wasm-utils)
+   Compiling wasm-utils v0.1.0 (/Users/xxx/projects/wasm-utils)
 warning: function `set_panic_hook` is never used
  --> src/utils.rs:1:8
   |
