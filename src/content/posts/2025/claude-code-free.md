@@ -61,7 +61,7 @@ npm i -g @anthropic-ai/claude-code @musistudio/claude-code-router
 ## 配置
 创建 `~/.claude-code-router/config.json` 文件(`windows` 下为对应的用户目录)
 
-这里展示了接入 阿里云 / `GLM` 模型的方式, 利用各大供应商的免费 `tokens` 额度实现免费使用, **如果免费额度用完, 或者想要满足日常使用的需求, 建议购买 <a href="https://bigmodel.cn/claude-code?utm_source=bigmodel&utm_medium=link&utm_term=cc&utm_campaign=Platform_Ops&_channel_track_key=i8kwCaos" target="_blank">GLM Coding Lite</a>**
+这里展示了接入 阿里云 / `GLM` 模型的方式, 利用各大供应商的免费 `tokens` 额度实现免费使用, **如果免费额度用完, 或者想要满足日常使用的需求, 建议购买 <a href="https://www.bigmodel.cn/claude-code?cc=fission_glmcode_sub_v1&ic=Q2N8XA4W77&n=a****3" target="_blank">GLM Coding Lite</a>**
 
 ### 阿里云百炼
 > **阿里云百炼有非常多的免费模型, 免费模型普遍都有一百万 `token` 额度**
@@ -125,7 +125,7 @@ npm i -g @anthropic-ai/claude-code @musistudio/claude-code-router
 更多参数及配置请参考 <a href="https://github.com/musistudio/claude-code-router/blob/main/README_zh.md#2-%E9%85%8D%E7%BD%AE" target="_blank">官方文档</a>
 
 ### 智谱
-> 智谱的新用户有 **两千万的免费 `tokens` 额度(不同模型)**, 或者可以使用按 `Prompt` 计次的包月服务 <a href="https://bigmodel.cn/claude-code?utm_source=bigmodel&utm_medium=link&utm_term=cc&utm_campaign=Platform_Ops&_channel_track_key=i8kwCaos" target="_blank">GLM Coding Lite</a>
+> 智谱的新用户有 **两千万的免费 `tokens` 额度(不同模型)**, 或者可以使用按 `Prompt` 计次的包月服务 <a href="https://www.bigmodel.cn/claude-code?cc=fission_glmcode_sub_v1&ic=Q2N8XA4W77&n=a****3" target="_blank">GLM Coding Lite</a>
 
 1. 进入 [智谱 BigModel](https://bigmodel.cn/finance-center/resource-package/package-mgmt), 点击右上角的 **财务**, 点击 **资源包管理 > 我的资源包** 查看免费额度
 ![](./assets/images/claude-code-free-glm.png)
@@ -136,7 +136,7 @@ npm i -g @anthropic-ai/claude-code @musistudio/claude-code-router
 
 
 > [!TIP]
-> 或者使用付费的 <a href="https://bigmodel.cn/claude-code?utm_source=bigmodel&utm_medium=link&utm_term=cc&utm_campaign=Platform_Ops&_channel_track_key=i8kwCaos" target="_blank">GLM Coding Lite</a> 服务, `Lite` 版本的按 `Prompt` 计费, **只需关注提问次数, 完全不用担心 `tokens` 消耗量**
+> 或者使用付费的 <a href="https://www.bigmodel.cn/claude-code?cc=fission_glmcode_sub_v1&ic=Q2N8XA4W77&n=a****3" target="_blank">GLM Coding Lite</a> 服务, `Lite` 版本的按 `Prompt` 计费, **只需关注提问次数, 完全不用担心 `tokens` 消耗量**
 
 2. 前往 <a href="https://open.bigmodel.cn/usercenter/proj-mgmt/apikeys" target="_blank">设置页面</a> 添加 `API Key`
 3. 创建 `~/.claude-code-router/config.json` 文件, **将模型添加到 `Providers` 数组中**, 将第二步复制的 `API Key` 填入 `Providers.api_key`, **并在 `Router` 中指定模型路由**
@@ -174,7 +174,7 @@ npm i -g @anthropic-ai/claude-code @musistudio/claude-code-router
 `claude-code-router` 提供了 `ccr` 命令来代理访问 `Claude Code`, 但 **直接使用 `ccr` 会导致很多问题**: 
 - 无法在 `vscode` 的 `Claude Code Plugin` 中使用我们配置的模型
 - 也无法在命令行中直接使用 `claude` 命令访问国产模型
-- 无法使用智谱的 <a href="https://bigmodel.cn/claude-code?utm_source=bigmodel&utm_medium=link&utm_term=cc&utm_campaign=Platform_Ops&_channel_track_key=i8kwCaos" target="_blank">GLM Coding Lite</a> 服务
+- 无法使用智谱的 <a href="https://www.bigmodel.cn/claude-code?cc=fission_glmcode_sub_v1&ic=Q2N8XA4W77&n=a****3" target="_blank">GLM Coding Lite</a> 服务
 
 因此我们要实现直接使用 `claude` 命令使用 `Claude Code`, 而不是使用 `ccr` 命令:
 
@@ -192,7 +192,7 @@ npm i -g @anthropic-ai/claude-code @musistudio/claude-code-router
 这里的 `ANTHROPIC_API_KEY` 就是 `~/.claude-code-router/config.json` 中的 `APIKEY`
 
 ### 使用智谱的 GLM Coding Lite 服务
-> 因为 <a href="https://bigmodel.cn/claude-code?utm_source=bigmodel&utm_medium=link&utm_term=cc&utm_campaign=Platform_Ops&_channel_track_key=i8kwCaos" target="_blank">GLM Coding Lite</a> 使用了类似 `Claude Max` / `Claude Pro` 的包时服务, 所以配置与直接访问 `API` 的配置不同
+> 因为 <a href="https://www.bigmodel.cn/claude-code?cc=fission_glmcode_sub_v1&ic=Q2N8XA4W77&n=a****3" target="_blank">GLM Coding Lite</a> 使用了类似 `Claude Max` / `Claude Pro` 的包时服务, 所以配置与直接访问 `API` 的配置不同
 
 ```json
 {
@@ -559,7 +559,7 @@ ccusage daily
 - [看这一篇就够了！Claude Code 接入四大国产编程模型 DeepSeek、GLM、Qwen、Kimi 全指南](https://juejin.cn/post/7543530064106602547)
 - [3 分钟讲透 Win 版 Claude Code部署：整合 Qwen-Coder + GLM-4.5，零翻墙平替 Cursor！](https://mp.weixin.qq.com/s/hJj13IDO4ysiGx_cPldwjg)
 - [claude-code-router 中文文档](https://github.com/musistudio/claude-code-router/blob/main/README_zh.md)
-- [GLM Coding Lite](https://bigmodel.cn/claude-code?utm_source=bigmodel&utm_medium=link&utm_term=cc&utm_campaign=Platform_Ops&_channel_track_key=i8kwCaos)
+- [GLM Coding Lite](https://www.bigmodel.cn/claude-code?cc=fission_glmcode_sub_v1&ic=Q2N8XA4W77&n=a****3)
 - [接入 Claude Code - GLM](https://docs.bigmodel.cn/cn/guide/develop/claude)
 - [#3166642325](https://github.com/musistudio/claude-code-router/issues/427#issuecomment-3166642325)
 - [context7](https://context7.com/)
