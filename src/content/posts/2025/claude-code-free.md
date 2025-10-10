@@ -16,11 +16,17 @@ draft: false
 lang: 'zh-CN'
 ---
 
-本文将介绍最近爆火的 `Claude Code` 在国内环境的使用, 包括安装与配置, 以及如何接入免费的国产模型
+本文将介绍最近爆火的 `Claude Code` **在国内环境的使用**, 包括安装与配置, 以及如何 **接入国产模型 <a href="https://www.bigmodel.cn/claude-code?cc=fission_glmcode_sub_v1&ic=Q2N8XA4W77&n=a****3" target="_blank">智谱 GLM</a>**
 
 > `2025-09-05`, `Anthropic` 发布了一篇公告: [更新对不受支持地区的销售限制](https://www.anthropic.com/news/updating-restrictions-of-sales-to-unsupported-regions), 将中国定义为敌对国家, 并且不再为中国公司(包含超过 50% 所有权的中国公司的子公司)提供服务
 > 
 > 这意味着 **在未来我们使用 `Claude` 服务的难度将越来越大**
+
+> [!TIP]
+> 如果想要获得最好的 `Vibe Coding` 体验, 推荐购买 <a href="https://www.bigmodel.cn/claude-code?cc=fission_glmcode_sub_v1&ic=Q2N8XA4W77&n=a****3" target="_blank">🔗 GLM Coding Lite</a> 服务, 包月只要 20 💰, `Lite` 版本的按 `Prompt` 计费, 每 `5` 小时最多约 `120` 次 `prompts`, 原因如下:
+> - `Claude Code` 消耗的 `token` 非常多(我现在一个月已经消耗了 `3` 亿多 `tokens` 💪), 如果按 `token` 消耗量计费会非常贵, 使用包月套餐可以无需担心消耗的 `token` 数量, 专注于 `Vibe Coding`
+> - `Claude Code` 是 `Anthropic` 推出的工具, 自然与 `Claude` 系列模型支持度最好, 其他大模型与 `Claude Code API` 不兼容, 也没有对 `Claude Code` 进行优化, 这也是 `@musistudio/claude-code-router` 库存在的意义; **<a href="https://www.bigmodel.cn/claude-code?cc=fission_glmcode_sub_v1&ic=Q2N8XA4W77&n=a****3" target="_blank">GLM Coding Lite</a> 专门提供了 `Claude Code` 的 `API`**
+
 
 ## vibe coding
 最近有个一很火的概念: `Vibe Coding`, 直译过来就是 **氛围编程**, `Vibe Coding` 的概念出自 `Andrej Karpathy`(前特斯拉人工智能总监, `OpenAI` 的创始成员之一) 的一条推文:
@@ -45,7 +51,12 @@ lang: 'zh-CN'
 
 ```bash
 # 这里使用的是 npm, 也可以使用 pnpm 或 yarn
-npm i -g @anthropic-ai/claude-code @musistudio/claude-code-router
+npm i -g @anthropic-ai/claude-code
+```
+
+如果需要接入阿里云模型, 则需要安装 `@musistudio/claude-code-router`, **使用智谱的 <a href="https://www.bigmodel.cn/claude-code?cc=fission_glmcode_sub_v1&ic=Q2N8XA4W77&n=a****3" target="_blank">GLM Coding</a> 服务, 则无需安装**
+```bash
+npm i -g @musistudio/claude-code-router
 ```
 
 这里全局安装了两个包:
@@ -58,10 +69,29 @@ npm i -g @anthropic-ai/claude-code @musistudio/claude-code-router
   - `GitHub Actions` 集成: 在您的 `GitHub` 工作流程中触发 `Claude Code` 任务。
   - 插件系统: 使用自定义转换器扩展功能。
 
+## 更新 Claude Code
+<a href="https://www.npmjs.com/package/@anthropic-ai/claude-code" target="_blank">`Claude Code`</a> 更新频率非常高, 要获得最佳的使用体验, 应该经常更新 `Claude Code`:
+
+```bash
+# 这里使用的是 npm, 也可以使用 pnpm 或 yarn
+npm i -g @anthropic-ai/claude-code@latest
+```
+
 ## 配置
 创建 `~/.claude-code-router/config.json` 文件(`windows` 下为对应的用户目录)
 
 这里展示了接入 阿里云 / `GLM` 模型的方式, 利用各大供应商的免费 `tokens` 额度实现免费使用, **如果免费额度用完, 或者想要满足日常使用的需求, 建议购买 <a href="https://www.bigmodel.cn/claude-code?cc=fission_glmcode_sub_v1&ic=Q2N8XA4W77&n=a****3" target="_blank">GLM Coding Lite</a>**
+
+| 大模型提供商 | 模型                                                                                            | 计费方式                                                                                                                                                            | 是否针对 `Anthropic API` 进行兼容优化                                                                                                 | 说明         |
+| ------------ | ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
+| 阿里云       | <a href="https://bailian.console.aliyun.com/?tab=model#/model-market">模型广场 - 阿里云百炼</a> | 有免费额度, **只能按 `token` 消耗量付费**                                                                                                                           | 无                                                                                                                                    | ❌ 不推荐使用 |
+| 智谱         | `GLM 4.6`                                                                                       | 可以购买 **包月/包季/包年 套餐** <a href="https://www.bigmodel.cn/claude-code?cc=fission_glmcode_sub_v1&ic=Q2N8XA4W77&n=a****3" target="_blank">GLM Coding Lite</a> | 提供了兼容 `Anthropic API` 的端点, 详见 <a href="https://docs.bigmodel.cn/cn/guide/develop/claude#claude-code">接入 `Claude Code`</a> | ✅ 推荐使用   |
+
+> [!TIP]
+> 推荐购买 <a href="https://www.bigmodel.cn/claude-code?cc=fission_glmcode_sub_v1&ic=Q2N8XA4W77&n=a****3" target="_blank">GLM Coding Lite</a> 服务, 包月只要 20 💰, `Lite` 版本的按 `Prompt` 计费, 每 `5` 小时最多约 `120` 次 `prompts`, 原因如下:
+> - `Claude Code` 消耗的 `token` 非常多(我现在已经消耗了 `3` 亿 `tokens` 💪), 如果按 `token` 消耗量计费会非常贵, 使用包月套餐可以无需担心消耗的 `token` 数量, 专注于 `Vibe Coding`
+> - `Claude Code` 是 `Anthropic` 推出的工具, 自然与 `Claude` 系列模型支持度最好, 其他大模型与 `Claude Code API` 不兼容, 也没有对 `Claude Code` 进行优化, 这也是 `@musistudio/claude-code-router` 库存在的意义; **<a href="https://www.bigmodel.cn/claude-code?cc=fission_glmcode_sub_v1&ic=Q2N8XA4W77&n=a****3" target="_blank">GLM Coding Lite</a> 专门提供了 `Claude Code` 的 `API`**
+
 
 ### 阿里云百炼
 > **阿里云百炼有非常多的免费模型, 免费模型普遍都有一百万 `token` 额度**
@@ -520,6 +550,43 @@ claude mcp add --transport http context7 https://mcp.context7.com/mcp --header "
 
 ## vscode 插件
 可以直接在 vscode 应用市场中搜索并安装 `Claude Code` 插件, 点击右上角的 `Claude Code` 图标即可启动
+
+1. 安装插件后, 点击右上角的 ❄️ `Claude Code` 插件图标, 显示如下界面
+![](./assets/images/claude-code-vscode-plugin-error.png)
+
+这是因为插件 **默认使用 `Anthropic` 官方的 `Claude` 系列模型**, 我们需要修改插件的配置:
+
+2. 在左侧插件列表中搜索 `Claude Code`, 然后找到 `Claude Code for VS Code`, 点击 ⚙️ 按钮, 点击设置
+
+![](./assets/images/claude-code-vscode-plugin-error2.png)
+
+3. 进入设置页面, 我们需要修改的是 `Environment Variables`, 点击 `在 settings.json 中编辑`
+
+![](./assets/images/claude-code-vscode-plugin-error3.png)
+
+4. 在 `settings.json` 中增加环境变量配置
+
+```diff
+{
++  "claude-code.environmentVariables": [
++    {
++        "name": "ANTHROPIC_BASE_URL",
++        "value": "https://open.bigmodel.cn/api/anthropic"
++    },
++    {
++        "name": "ANTHROPIC_AUTH_TOKEN",
++        "value": "asoiejilfjJIOfejwiofji.OIsfjosiaejnlf"
++    },
++  ]
+}
+```
+
+> [!TIP]
+> **请将 `ANTHROPIC_AUTH_TOKEN` 对应的 `value`, 替换为自己的 `api key`**
+
+5. 关闭 `Claude Code` 窗口, 再次点击 ❄️ `Claude Code` 插件图标, 此时就可以正常进行对话了
+
+![](./assets/images/claude-code-vscode-plugin-error4.png)
 
 ## ccusage
 `ccusage` 是一个用于统计 `Claude Code` 使用量的工具, 它从 `~/.claude/projects` 目录读取了大模型的对话历史记录, 从而统计每天的 `tokens` 消耗量
