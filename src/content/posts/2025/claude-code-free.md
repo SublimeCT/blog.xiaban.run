@@ -588,6 +588,41 @@ claude mcp add --transport http context7 https://mcp.context7.com/mcp --header "
 
 ![](./assets/images/claude-code-vscode-plugin-error4.png)
 
+### Error Invalid API key
+
+```bash
+> hello ?
+⎿  Invalid API key · Please run /login
+```
+
+在使用 `GLM` 时, 如果遇到了 `Invalid API key` 错误, 说明 `Claude Code` 并没有读取到你配置的 `API Key`, 应该检查以下配置文件:
+
+- `./.claude/settings.local.json`: 项目内的配置文件
+- `~/.claude/settings.local.json`: 全局配置文件
+
+`Claude Code` 在使用时, 可能会将项目的配置写入 `./.claude/settings.local.json`, 也会 **会优先读取 项目内的配置文件**, 所以如果有项目内的配置文件, 那么我们 **也要在这个文件内配置 `API Key`**:
+
+```json {13,14} title="./.claude/settings.local.json"
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir:*)",
+      "Read(//Users/xxx/projects/xxx/src/)",
+    ],
+    "deny": [
+      "Bash(pnpm lint:*)"
+    ],
+    "ask": []
+  },
+  "env": {
+    "ANTHROPIC_BASE_URL": "https://open.bigmodel.cn/api/anthropic",
+    "ANTHROPIC_AUTH_TOKEN": "asiehjfioahgeriaofhjo23i.aiosjfgoiaeijfjio",
+    "API_TIMEOUT_MS": "3000000",
+    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1"
+  }
+}
+```
+
 ## ccusage
 `ccusage` 是一个用于统计 `Claude Code` 使用量的工具, 它从 `~/.claude/projects` 目录读取了大模型的对话历史记录, 从而统计每天的 `tokens` 消耗量
 
