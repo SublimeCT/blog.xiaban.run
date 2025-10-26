@@ -3,10 +3,17 @@ title: 我在工作日使用的 ios 快捷指令
 published: 2025-10-25
 description: '这是一篇关于我如何用 iOS 快捷指令自动化工作日生活的分享。从自动判断是否为工作日，到自动启动闹钟、钉钉打卡、车载蓝牙触发导航，一切都在后台悄然完成。让繁琐的日常变得智能又轻松。'
 image: './assets/images/ios-shotcut-working-day.jpg'
-tags: []
-category: ''
+tags: [
+  'IOS',
+  '快捷指令',
+  'iPhone',
+  '工作日闹钟',
+  '钉钉打卡',
+  '通勤'
+]
+category: '教程'
 draft: false 
-lang: ''
+lang: 'zh-CN'
 ---
 
 > [!TIP]
