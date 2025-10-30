@@ -21,9 +21,15 @@ export const friendLinkSections: FriendLinkSection[] = [
 				desc: "这是 zq 的网站",
 			},
 			{
+				title: "PankitGG",
+				url: "http://ai-nous.com/",
+				avatar: "/static-images/PangitGG-avatar.jpg",
+				desc: "探索AI技术的无限可能, 专注于AI技术分享和交流的平台, 在这里你可以找到最新的AI资讯、技术文章和学习资源。",
+			},
+			{
 				title: "梦辰の小窝",
 				url: "https://mc.mimeng.top/",
-				avatar: "https://avatars.githubusercontent.com/u/98578510",
+				avatar: "https://mc.mimeng.top/_astro/avatar.C0sWSkbw_Z2aF073.avif",
 				desc: "Eagerly Anticipating Our Reunion",
 			},
 		],
