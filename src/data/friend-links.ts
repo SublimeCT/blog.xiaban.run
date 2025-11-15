@@ -16,13 +16,13 @@ export const friendLinkSections: FriendLinkSection[] = [
 		items: [
 			{
 				title: "hoppinzq",
-				url: "https://hoppinzq.com/hoppinai/",
+				url: "https://blog.hoppinzq.com/",
 				avatar: "https://hoppinzq.com/zui/static/picture/0.jpg",
 				desc: "这是 zq 的网站",
 			},
 			{
 				title: "PankitGG",
-				url: "http://ai-nous.com/",
+				url: "http://blog.ai-nous.com/",
 				avatar: "/static-images/PangitGG-avatar.jpg",
 				desc: "探索AI技术的无限可能, 专注于AI技术分享和交流的平台, 在这里你可以找到最新的AI资讯、技术文章和学习资源。",
 			},
