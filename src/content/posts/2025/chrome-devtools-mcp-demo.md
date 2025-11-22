@@ -1,6 +1,6 @@
 ---
 title: 使用 Google 官方的 chrome-devtools-mcp 让 Claude Code 操控浏览器
-published: 2025-11-15
+published: 2025-11-22
 description: 'Google 终于后知后觉, 推出了官方的 Chrome MCP, 我们来通过几个日常的使用场景来检验一下这个 MCP 是否能调用 Chrome 实现一些自动化任务'
 image: './assets/images/chrome-devtools-cover.png'
 tags: [
@@ -296,6 +296,8 @@ lsd -l
 
 只下载视频, 最后删除所有产生的中间文件
 ```
+> [!ITP]
+> 这里的脚本文件可能因为网络问题无法下载, 我们可以直接访问 [https://github.com/zhzLuke96/douyin-dl-user-js/blob/main/dy-dl.user.js](https://github.com/zhzLuke96/douyin-dl-user-js/blob/main/dy-dl.user.js) 并下载到本地来使用
 
 ![](./assets/images/chrome-devtools-mcp-example-douyin2.png)
 
@@ -303,7 +305,30 @@ lsd -l
 
 ![](./assets/images/chrome-devtools-mcp-example-douyin3.png)
 
-### 
+### 批量下载抖音视频并提取音频文本
+我们先登录抖音(`douyin.com`), 然后才能显示用户详情页的全部视频
+
+```bash
+claude
+> 调用 chrome-devtools-mcp 打开抖音(douyin.com)
+```
+
+首先我们将 [https://github.com/zhzLuke96/douyin-dl-user-js/blob/main/dy-dl.user.js](https://github.com/zhzLuke96/douyin-dl-user-js/blob/main/dy-dl.user.js) 下载到 `/tmp/dy-dl.user.js`, 然后我们手动登录抖音, 再发送以下内容:
+
+```bash
+1. 读取 `/tmp/dy-dl.user.js` 文件, 详细分析并阅读分析这个油猴脚本, 输出下载链接获取逻辑, 使用脚本中的下载逻辑进行视频的下载
+2. 调用 chrome-devtools mcp 访问 douyin.com, 并搜索 '强子没判', 进入用户主页, 在视频列表元素内向下滚动直到所有视频加载完毕, 然后获取点赞量最高的 10 个视频, 并行打开这 10 个视频的详情页
+3. 在视频详情页执行 `/tmp/dy-dl.user.js` , 点击下载按钮进行下载, 并将全部视频的标题和下载链接写入 js 脚本, 并在 js 脚本中增加并行下载全部视频文件的逻辑
+4. 然后执行脚本将全部视频并行下载到 `/tmp/dy-dl-videos` 目录下, 视频文件名使用视频标题名称
+5. 等到 10 个视频全部下载完毕时, 对每个视频执行 `ffmpeg -i xxx.mp4 -vn -c:a copy xxx-audio.m4a` 提取音频文件
+6. 执行 `whisper xxx.m4a --model medium --language Chinese --output_dir "xxx-audios/audio.vvt"` 提取音频文本
+
+**期间生成的所有中间文件都必须放到 `/tmp` 目录下**
+```
+
+![](./assets/images/chrome-devtools-mcp-example-douyin-download.png)
+![](./assets/images/chrome-devtools-mcp-example-douyin-download.png2.png)
+![](./assets/images/chrome-devtools-mcp-example-douyin-download3.png)
 
 ## 参考
 - [chrome-devtools-mcp](https://github.com/ChromeDevTools/chrome-devtools-mcp)

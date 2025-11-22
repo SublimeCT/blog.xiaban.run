@@ -80,3 +80,4 @@ The build pipeline includes:
 - All assets referenced in config should be relative to `/src` or `/public`
 - Theme configuration supports both fixed and customizable color schemes
 - Deploy script uses rsync to push to a specific production server
+- 必须使用中文
