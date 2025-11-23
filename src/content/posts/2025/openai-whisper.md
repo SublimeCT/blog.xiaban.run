@@ -1,5 +1,5 @@
 ---
-title: 使用 whisper 进行语音识别 - 使用 yt-dlp + ffmpeg + whisper 下载提取并提取语音文本
+title: 使用 yt-dlp + ffmpeg + whisper 下载提取并识别语音文本
 published: 2025-11-22
 description: 'openai/whisper 是最流行的语音识别工具, 它在 Github 上收获了 91.1k star, 我们来安装一下 whisper, 并在使用 yt-dlp + ffmpeg + whisper 下载提取并提取语音文本, 测试一下中文普通话的识别效果'
 image: './assets/images/openai-whisper-cover.png'
@@ -327,7 +327,7 @@ whisper 说好不哭.m4a --model medium --language Chinese
 [02:48.300 --> 02:53.300] 詞曲 李宗盛
 ```
 
-输出的竟然是繁体字... 看来用来训练的预料基本都来自 `TW` 😭, `anyway`, 我们在尝试一下使用比特率最低的音频文件来进行识别:
+输出的竟然是繁体字... 看来用来训练的语料基本都来自 `TW` 😭, `anyway`, 我们在尝试一下使用比特率最低的音频文件来进行识别:
 
 ```bash
 yt-dlp "https://www.bilibili.com/video/BV1bJ41137yp" -f 30216 -o "说好不哭-30216.m4a"
