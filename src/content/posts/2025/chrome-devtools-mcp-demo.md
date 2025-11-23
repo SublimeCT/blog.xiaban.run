@@ -13,7 +13,7 @@ tags: [
   '自动化'
 ]
 category: '教程'
-draft: true
+draft: false
 lang: 'zh-CN'
 ---
 
