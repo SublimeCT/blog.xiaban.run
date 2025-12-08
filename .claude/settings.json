@@ -1,0 +1,13 @@
+{
+	"permissions": {
+		"allow": ["Bash(cat:*)", "Bash(mkdir:*)", "Bash(cp:*)"],
+		"deny": [
+			"Bash(pnpm dev)",
+			"Bash(pnpm lint)",
+			"Bash(pnpm test)",
+			"Bash(pnpm run:*)",
+			"Base(head:*)"
+		],
+		"ask": []
+	}
+}
