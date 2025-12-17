@@ -6,8 +6,8 @@
 			"Bash(pnpm lint)",
 			"Bash(pnpm test)",
 			"Bash(pnpm run:*)",
-			"Base(head:*)"
+			"Bash(head:*)"
 		],
-		"ask": []
+		"ask": ["Bash(rm:*)"]
 	}
 }
