@@ -4,6 +4,7 @@ enum I18nKey {
 	archive = "archive",
 	links = "links",
 	openSource = "openSource",
+	demo = "demo",
 	search = "search",
 
 	tags = "tags",

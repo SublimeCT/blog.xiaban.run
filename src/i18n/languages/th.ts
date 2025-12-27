@@ -7,9 +7,9 @@ export const th: Translation = {
 	[Key.archive]: "คลัง",
 	[Key.search]: "ค้นหา",
 	[Key.links]: "ลิงก์",
-	[Key.openSource]: "โอเพนซอร์ส",
-
-	[Key.tags]: "ป้ายกำกับ",
+	[Key.openSource]: "โอเพ่นซอร์ส",
+	[Key.demo]: "Demo",
+	[Key.tags]: "แท็ก",
 	[Key.categories]: "หมวดหมู่",
 	[Key.recentPosts]: "โพสต์ล่าสุด",
 
