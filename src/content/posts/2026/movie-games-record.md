@@ -15,14 +15,14 @@ tags: [
   '互动剧情类游戏生成器',
 ]
 category: '探索'
-draft: true 
+draft: false 
 lang: 'zh-CN'
 ---
 
-前段时间 `vibe coding` 了一个[互动剧情类游戏的生成工具](http://movie-games.xiaban.run/), 在开发过程中遇到了一系列问题, 本文将对具体的问题进行介绍
+前段时间 `vibe coding` 了一个<a href="http://movie-games.xiaban.run/" target="_blank">🔗 互动剧情类游戏的生成工具</a>, 在开发过程中遇到了一系列问题, 本文将对具体的问题进行介绍
 
 ## 互动剧情类游戏
-[互动电影游戏](https://zh.wikipedia.org/wiki/%E4%BA%92%E5%8A%A8%E7%94%B5%E5%BD%B1%E6%B8%B8%E6%88%8F) 是一个游戏类型, 与此相同的称呼还有: *剧情互动类游戏* / *互动电影游戏* / *交互式小说* / *互动小说* 等等
+<a href="https://zh.wikipedia.org/wiki/%E4%BA%92%E5%8A%A8%E7%94%B5%E5%BD%B1%E6%B8%B8%E6%88%8F" target="_blank">互动电影游戏</a> 是一个游戏类型, 与此相同的称呼还有: *剧情互动类游戏* / *互动电影游戏* / *交互式小说* / *互动小说* 等等
 
 其实我真正想做的是有视频的互动剧情类游戏, 这才是这类游戏的完整形态, 但受限于视频和图片生成的成本, 我最终选择了只生成剧情和角色头像的版本, 那么 **什么是互动剧情类游戏呢?**
 
@@ -55,7 +55,7 @@ lang: 'zh-CN'
 所以 AI 难以直接生成替代人类创作和打磨的剧本
 
 ### 🎬 电影
-> 现阶段各大厂都推出了自己的视频模型, 例如 [video-generation](https://gemini.google/tw/overview/video-generation/?hl=zh-TW) / [Adobe Firefly](https://www.adobe.com/tw/products/firefly/features/ai-video-generator.html), 而且不约而同的标榜自己可以进行电影级别的视频生成, 但只要你仔细观察生成的视频, 就会发现一些违背现实世界物理规律的地方, 但这不妨碍用于为视频增加特效等应用场景, 我认为一定会有部分特效非常适合 AI 生成
+> 现阶段各大厂都推出了自己的视频模型, 例如 <a href="https://gemini.google/tw/overview/video-generation/?hl=zh-TW" target="_blank">video-generation</a> / <a href="https://www.adobe.com/tw/products/firefly/features/ai-video-generator.html" target="_blank">Adobe Firefly</a>, 而且不约而同的标榜自己可以进行电影级别的视频生成, 但只要你仔细观察生成的视频, 就会发现一些违背现实世界物理规律的地方, 但这不妨碍用于为视频增加特效等应用场景, 我认为一定会有部分特效非常适合 AI 生成
 
 ![](./assets/images/movie-games-record-site.png)
 如何制作一部工业级的电影?
@@ -110,10 +110,13 @@ lang: 'zh-CN'
 ![](./assets/images/movie-games-record-dataflow.excalidraw.svg)
 
 ### 图片生成
-图片生成使用 GLM 的免费(限制并发)文生图模型 [cogview-3-flash](https://docs.bigmodel.cn/cn/guide/models/free/cogview-3-flash)
+图片生成使用 GLM 的免费(限制并发)文生图模型 <a href="https://docs.bigmodel.cn/cn/guide/models/free/cogview-3-flash" target="_blank">cogview-3-flash</a>, 虽然质量很差, 但是它免费用我高低得夸它一下
+
+> [!TIP]
+> 非常感谢智谱慷慨得提供免费模型, 如果你有 `Coding` 的需求, 可以购买智谱的 <a href="https://www.bigmodel.cn/claude-code?cc=fission_glmcode_sub_v1&ic=Q2N8XA4W77&n=a****3" target="_blank">🔗 GLM Coding Plan</a> 订阅支持一下, 或者 [点击这里试用](https://www.bigmodel.cn/activity/trial-card/A8AMOHCHA5)
 
 ### ~~视频生成~~
-其实也试过 GLM 的免费(限制并发)的视频生成模型 [cogvideox-flash](https://docs.bigmodel.cn/cn/guide/models/free/cogvideox-flash), 但是生成一个视频大概需要 3 分钟, 而且限制并发数只有 1, 生成的视频质量 emmmmm 非常拉, 其他的商业模型成本太高, 就没有使用视频生成
+其实也试过 GLM 的免费(限制并发)的视频生成模型 <a href="https://docs.bigmodel.cn/cn/guide/models/free/cogvideox-flash" target="_blank">cogvideox-flash</a>, 但是生成一个视频大概需要 3 分钟, 而且限制并发数只有 1, 生成的视频质量 emmmmm 非常拉, 其他的商业模型成本太高, 就没有使用视频生成
 
 ## 开发
 ### 技术栈
@@ -222,3 +225,18 @@ lang: 'zh-CN'
 
 ## 总结
 至此, 一个可以使用的 互动剧情类游戏生成器 已经初现雏形, 所有的问题我们将在后续文章中探索解决方案
+
+## 参考
+- <a href="https://www.bigmodel.cn/claude-code?cc=fission_glmcode_sub_v1&ic=Q2N8XA4W77&n=a****3" target="_blank">🔗 GLM Coding Plan</a>
+- <a href="http://movie-games.xiaban.run/" target="_blank">互动剧情类游戏的生成工具</a>
+- <a href="https://zh.wikipedia.org/wiki/%E4%BA%92%E5%8A%A8%E7%94%B5%E5%BD%B1%E6%B8%B8%E6%88%8F" target="_blank">互动电影游戏</a>
+- <a href="https://store.steampowered.com/curator/36149206" target="_blank">奇异人生 系列</a>
+- <a href="https://store.steampowered.com/app/1222140/_/" target="_blank">底特律：化身为人</a>
+- <a href="https://store.steampowered.com/app/939400/LoveChoice/?l=schinese" target="_blank">拣爱</a>
+- <a href="https://store.steampowered.com/app/2322560/_/" target="_blank">完蛋! 我被美女包围了!</a>
+- <a href="https://store.steampowered.com/app/1341820/As_Dusk_Falls/" target="_blank">日落黄昏时(As Dusk Falls)</a>
+- <a href="https://store.steampowered.com/app/1577120/_/" target="_blank">采石场惊魂</a>
+- <a href="https://gemini.google/tw/overview/video-generation/?hl=zh-TW" target="_blank">video-generation</a>
+- <a href="https://www.adobe.com/tw/products/firefly/features/ai-video-generator.html" target="_blank">Adobe Firefly</a>
+- <a href="https://docs.bigmodel.cn/cn/guide/models/free/cogview-3-flash" target="_blank">cogview-3-flash</a>
+- <a href="https://docs.bigmodel.cn/cn/guide/models/free/cogvideox-flash" target="_blank">cogvideox-flash</a>

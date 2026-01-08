@@ -23,7 +23,7 @@ lang: 'zh-CN'
 > 这意味着 **在未来我们使用 `Claude` 服务的难度将越来越大**
 
 > [!TIP]
-> 如果想要获得最好的 `Vibe Coding` 体验, 推荐购买 <a href="https://www.bigmodel.cn/claude-code?cc=fission_glmcode_sub_v1&ic=Q2N8XA4W77&n=a****3" target="_blank">🔗 GLM Coding Lite</a> 服务, 包月只要 20 💰, `Lite` 版本的按 `Prompt` 计费, 每 `5` 小时最多约 `120` 次 `prompts`, 原因如下:
+> 如果想要获得最好的 `Vibe Coding` 体验, 推荐购买 <a href="https://www.bigmodel.cn/claude-code?cc=fission_glmcode_sub_v1&ic=Q2N8XA4W77&n=a****3" target="_blank">🔗 GLM Coding Lite</a> 服务(也可以 <a href="https://www.bigmodel.cn/activity/trial-card/A8AMOHCHA5">🔗 点击这里</a> 先免费试用 7 天), 包月只要 20 💰, `Lite` 版本的按 `Prompt` 计费, 每 `5` 小时最多约 `120` 次 `prompts`, 原因如下:
 > - `Claude Code` 消耗的 `token` 非常多(我现在一个月已经消耗了 `3` 亿多 `tokens` 💪), 如果按 `token` 消耗量计费会非常贵, 使用包月套餐可以无需担心消耗的 `token` 数量, 专注于 `Vibe Coding`
 > - `Claude Code` 是 `Anthropic` 推出的工具, 自然与 `Claude` 系列模型支持度最好, 其他大模型与 `Claude Code API` 不兼容, 也没有对 `Claude Code` 进行优化, 这也是 `@musistudio/claude-code-router` 库存在的意义; **<a href="https://www.bigmodel.cn/claude-code?cc=fission_glmcode_sub_v1&ic=Q2N8XA4W77&n=a****3" target="_blank">GLM Coding Lite</a> 专门提供了 `Claude Code` 的 `API`**
 
