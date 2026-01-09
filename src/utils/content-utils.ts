@@ -3,8 +3,11 @@ import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import { getCategoryUrl } from "@utils/url-utils.ts";
 
-// // Retrieve posts and sort them by publication date
-async function getRawSortedPosts() {
+/**
+ * 获取并按发布时间倒序排序的完整文章列表
+ * @returns {Promise<CollectionEntry<"posts">[]>} 排序后的文章集合
+ */
+async function getRawSortedPosts(): Promise<CollectionEntry<"posts">[]> {
 	const allBlogPosts = await getCollection("posts", ({ data }) => {
 		return import.meta.env.PROD ? data.draft !== true : true;
 	});
@@ -17,7 +20,11 @@ async function getRawSortedPosts() {
 	return sorted;
 }
 
-export async function getSortedPosts() {
+/**
+ * 获取带前后相邻文章信息的排序后的完整文章列表
+ * @returns {Promise<CollectionEntry<"posts">[]>} 排序后的文章集合
+ */
+export async function getSortedPosts(): Promise<CollectionEntry<"posts">[]> {
 	const sorted = await getRawSortedPosts();
 
 	for (let i = 1; i < sorted.length; i++) {
@@ -35,6 +42,10 @@ export type PostForList = {
 	slug: string;
 	data: CollectionEntry<"posts">["data"];
 };
+/**
+ * 获取用于列表展示的文章数据（不含 body）
+ * @returns {Promise<PostForList[]>} 文章列表数据
+ */
 export async function getSortedPostsList(): Promise<PostForList[]> {
 	const sortedFullPosts = await getRawSortedPosts();
 
@@ -51,6 +62,10 @@ export type Tag = {
 	count: number;
 };
 
+/**
+ * 获取标签统计列表
+ * @returns {Promise<Tag[]>} 标签及计数列表
+ */
 export async function getTagList(): Promise<Tag[]> {
 	const allBlogPosts = await getCollection<"posts">("posts", ({ data }) => {
 		return import.meta.env.PROD ? data.draft !== true : true;
@@ -78,6 +93,10 @@ export type Category = {
 	url: string;
 };
 
+/**
+ * 获取分类统计列表
+ * @returns {Promise<Category[]>} 分类及计数列表
+ */
 export async function getCategoryList(): Promise<Category[]> {
 	const allBlogPosts = await getCollection<"posts">("posts", ({ data }) => {
 		return import.meta.env.PROD ? data.draft !== true : true;

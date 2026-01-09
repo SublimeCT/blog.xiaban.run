@@ -1,5 +1,9 @@
 import { defineCollection, z } from "astro:content";
 
+/**
+ * 文章内容集合配置
+ * @returns {import("astro:content").SchemaContext}
+ */
 const postsCollection = defineCollection({
 	schema: z.object({
 		title: z.string(),
@@ -19,10 +23,18 @@ const postsCollection = defineCollection({
 		nextSlug: z.string().default(""),
 	}),
 });
+/**
+ * 规范说明集合配置
+ * @returns {import("astro:content").SchemaContext}
+ */
 const specCollection = defineCollection({
 	schema: z.object({}),
 });
-export const collections = {
+/**
+ * 内容集合映射
+ * @type {Record<string, ReturnType<typeof defineCollection>>}
+ */
+export const collections: Record<string, ReturnType<typeof defineCollection>> = {
 	posts: postsCollection,
 	spec: specCollection,
 };

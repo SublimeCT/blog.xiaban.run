@@ -1,7 +1,11 @@
 import { definePlugin } from "@expressive-code/core";
 import type { Element } from "hast";
 
-export function pluginCustomCopyButton() {
+/**
+ * 自定义复制按钮插件
+ * @returns {ReturnType<typeof definePlugin>} Expressive Code 插件实例
+ */
+export function pluginCustomCopyButton(): ReturnType<typeof definePlugin> {
 	return definePlugin({
 		name: "Custom Copy Button",
 		hooks: {
