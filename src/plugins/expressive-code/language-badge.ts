@@ -3,7 +3,11 @@
  */
 import { definePlugin } from "@expressive-code/core";
 
-export function pluginLanguageBadge() {
+/**
+ * 代码语言标识插件
+ * @returns {ReturnType<typeof definePlugin>} Expressive Code 插件实例
+ */
+export function pluginLanguageBadge(): ReturnType<typeof definePlugin> {
 	return definePlugin({
 		name: "Language Badge",
 		baseStyles: () => `

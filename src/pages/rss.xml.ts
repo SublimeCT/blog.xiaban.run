@@ -6,6 +6,10 @@ import MarkdownIt from "markdown-it";
 import sanitizeHtml from "sanitize-html";
 import { siteConfig } from "@/config";
 
+/**
+ * Markdown 解析器实例
+ * @type {MarkdownIt}
+ */
 const parser = new MarkdownIt();
 
 function stripInvalidXmlChars(str: string): string {
@@ -16,7 +20,12 @@ function stripInvalidXmlChars(str: string): string {
 	);
 }
 
-export async function GET(context: APIContext) {
+/**
+ * RSS 路由处理函数
+ * @param {APIContext} context - Astro 路由上下文
+ * @returns {Promise<Response>} RSS 响应
+ */
+export async function GET(context: APIContext): Promise<Response> {
 	const blog = await getSortedPosts();
 
 	return rss({

@@ -155,7 +155,15 @@ export default defineConfig({
 		],
 	},
 	vite: {
-		assetsInclude: ["**/*.{mov,MOV}"],
+		/**
+		 * Vite 资源包含配置
+		 *
+		 * 将非标准扩展名作为静态资源处理，避免 Rollup 解析为 JavaScript 模块导致构建失败。
+		 *
+		 * - mov/MOV: 视频资源
+		 * - excalidraw: Excalidraw 导出的 JSON 文件，作为静态文件拷贝
+		 */
+		assetsInclude: ["**/*.{mov,MOV,excalidraw}"],
 		build: {
 			rollupOptions: {
 				onwarn(warning, warn) {
