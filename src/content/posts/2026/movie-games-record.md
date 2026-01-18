@@ -19,7 +19,7 @@ draft: false
 lang: 'zh-CN'
 ---
 
-前段时间 `vibe coding` 了一个<a href="http://movie-games.xiaban.run/" target="_blank">🔗 互动剧情类游戏的生成工具</a>, 在开发过程中遇到了一系列问题, 本文将对具体的问题进行介绍
+前段时间 `vibe coding` 了一个<a href="http://movie-games.xiaban.run/" target="_blank">🔗 互动剧情类游戏的生成工具</a>, <a ref="https://movie-games.xiaban.run/play/2b22e895-ce32-488e-a9fe-a015355eb2ae">点此游玩</a>, 在开发过程中遇到了一系列问题, 本文将对具体的问题进行介绍
 
 ## 互动剧情类游戏
 <a href="https://zh.wikipedia.org/wiki/%E4%BA%92%E5%8A%A8%E7%94%B5%E5%BD%B1%E6%B8%B8%E6%88%8F" target="_blank">互动电影游戏</a> 是一个游戏类型, 与此相同的称呼还有: *剧情互动类游戏* / *互动电影游戏* / *交互式小说* / *互动小说* 等等
@@ -138,6 +138,7 @@ lang: 'zh-CN'
 - `/generate/prompt`: 返回 `/generate` 接口使用的提示词
 
 ## 剧情树
+![](./assets/images/movie-games-record-node-tree.png)
 这里面最复杂的就是剧情树了, 因为互动剧情类游戏是 **多故事线** / **多结局**, 所以实际上 **剧情是树结构的, 而不是一条直线, 这导致了很多问题**
 
 ### 剧情节点
