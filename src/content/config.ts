@@ -34,7 +34,10 @@ const specCollection = defineCollection({
  * 内容集合映射
  * @type {Record<string, ReturnType<typeof defineCollection>>}
  */
-export const collections: Record<string, ReturnType<typeof defineCollection>> = {
+export const collections: Record<
+	string,
+	ReturnType<typeof defineCollection>
+> = {
 	posts: postsCollection,
 	spec: specCollection,
 };
