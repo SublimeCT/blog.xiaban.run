@@ -376,6 +376,9 @@ fn phase2_prompt(
 - 减少节点数量, 增加 level 数量以增加剧情深度
 - 并发生成节点
 
+### 增加 acts
+我们引入 `act`(幕/阶段) 的概念, 可以理解为小说的每个大章节, 并且在每个 `act` 中的第一层中都只允许存在一个节点, 这也就意味着我们对节点进行了多次强制收束, 并且我们也会在后面生成节点的时候, **并发生成每个幕**, 这样做看似会导致剧情中的每个章节相互隔离, 但是我们通过通过 先规划剧本 和 引入并规划剧情状态 的方式规避了这个问题
+
 ## 实现
 ### 1. 生成剧本
 由于我们生成的剧情节点树非常复杂, 为了提供尽可能确定的信息, 我们需要首先规划全局的剧本结构, 就像我们从北京出发前往纽约, 我们需要指定至少一条路线, 然后再规划好在哪里换乘, 在什么时间休息, 如果遇到可能出现的问题应该如何应对, 这些前期准备是非常重要的
@@ -846,45 +849,244 @@ interface Choice {
 我测试了一下 [deepseek 的输出](https://chat.deepseek.com/share/nbodpwrki54a5coulb), 发现 LLM 根本无法生成结构严谨的逻辑拓扑, 出现了 [上篇文章](/movie-games-record) 一样的问题
 
 #### 2.2 通过程序生成逻辑拓扑
-下面我们来通过程序实现一个简单的逻辑拓扑生成方法, 对应的输入就是 [剧情信息 Output](#剧情信息-Output), 输出就是一个不包含实际内容的逻辑拓扑 JSON 字符串
+下面我们来通过程序实现一个简单的逻辑拓扑生成方法, 对应的输入就是 [剧情信息 Output](#剧情信息-output), 输出就是一个不包含实际内容的逻辑拓扑 JSON 字符串
 
 ##### 逻辑拓扑数据类型
 ```typescript
-/** 剧情节点树 */
-type StoryNodeList = [StoryNode]
-interface StoryNode {
-  /** 节点 ID, 从第二层(L2)开始 */
-  id: NodeId;
-  /** 节点的剧情梗概, 不超过 20 字 */
-  summary: string
-  /** 选项列表, 数量 */
-  choices: [Choice, Choice]
+/** 至少包含一个元素的数组（非空数组） */
+type NonEmptyArray<T> = readonly [T, ...T[]]
+
+/**
+ * 第一行只能有一个元素，后续每一行至少一个元素的二维数组
+ */
+type RestrictedTwoDimensionalArray<T> = readonly [
+  readonly [T],
+  ...NonEmptyArray<T>[]
+]
+
+/**
+ * 包含全部剧情节点的 分层有向无环图 (`Layered Directed Acyclic Graph`)
+ * @description 具有严格详细数学约束的 **分层有向无环图** 剧情节点图
+ */
+export type LDAGActs = NonEmptyArray<LDAGNodes>
+
+/**
+ * 每一幕的剧情节点图
+ */
+export type LDAGNodes = RestrictedTwoDimensionalArray<LDAGNode>
+
+/**
+ * 结局节点集合
+ * @description endingName 为结局节点名称, EndingNode 为结局节点信息
+ */
+export type EndingNodes = {
+  [endingName: `ENDING_${string}`]: EndingNode
 }
+
+/** 结局节点 */
+interface EndingNode {
+  /** 结局的详细描述, 不超过 35 字 */
+  content: string
+  /** 触发 该结局的 level 索引 */
+  triggerLevel: number
+}
+
 /**
  * 节点 ID, 格式为 `$level-$index`, 例如 `L1N1` 表示第一层中的第一个节点
+ * @description level 表示第几层, index 表示该层中的第几个节点(从 1 开始索引)
  * @example L1N1
  */
-type NodeId = string
+type NodeId = `L${number}N${number}`
+
+/** 结局节点 ID */
+type EndingNodeId = `ENDING_${string}`
+
 /**
- * 结局节点名称, 例如 '完美人生' 对应 `endings` 中的 '完美人生' 结局
+ * LDAG 分层有向无环图节点
  */
-type EndNodeId = string
-interface Choice {
-  /** 该选项的内容, 先不生成内容 */
-  content: ''
-  /** 该选项指向的下一个节点 ID(或结局节点 ID) */
-  nextNodeId: NodeId | EndNodeId
+interface LDAGNode {
   /**
-   * 当获得指定的(一个或两个) flag 时, 需要跳转的下一个节点 ID(或结局节点 ID)
-   * @description `key` 为下一个节点 ID(或结局节点 ID), `value` 为触发跳转需要的全部 flag; **`key` 不能与 `nextNodeId` 相同**
-   * @example `{ "L10N2": ["学业觉醒"] }` - 当获得 `学业觉醒` 这个 flag 时, 跳转至 `L10N2` 节点
-   * @example `{ "L10N3": ["青春悸动"] }` - 当获得 `青春悸动` 这个 flag 时, 跳转至 `L10N3` 节点
-   * @example `{ "不幸遇难": ["命悬一线", "迷失方向"] }` - 当获得 `命悬一线` 和 `迷失方向` 这个 flag 时, 跳转至 `不幸遇难` 结局节点
+   * 节点 ID, 格式为 `$level-$index`, 例如 `L1N1` 表示第一层中的第一个节点
+   * @example L1N1 起始节点
+   * @example L2N2 位于第二层的第二个节点(索引为 2 的节点)
    */
-  plotBranching?: {
-    [nextNodeId: NodeId | EndNodeId]: [string] | [string, string]
-  }
-  /** 选择当前节点之后获取到的 flag */
-  flag?: string
+  id: NodeId
+  /** 节点内容, 不超过 50 字 */
+  content: string
+  /** 该节点包含或关联的角色 name, 数量控制在 1-3 个 */
+  characters: Array<string>
+  /**
+   * 选项列表, 数量为 1-3
+   * ## 允许节点收束
+   * 允许选项指向相同的节点
+   */
+  choices: [LDAGNodeChoice] | [LDAGNodeChoice, LDAGNodeChoice] | [LDAGNodeChoice, LDAGNodeChoice, LDAGNodeChoice]
+}
+
+/** 节点的选项 */
+interface LDAGNodeChoice {
+  /** 该选项的内容, 不超过 25 字 */
+  content: string
+  /** 
+   * 触发(设置)的 flag 名称 
+   * @description 对应 BluePrint 中的 flags[flagName].triggerLevel
+   */
+  triggerFlag?: string
+  /** 
+   * 该选项指向的下一个节点 ID 
+   * @description 如果是 string, 表示无条件跳转; 如果是对象, 表示根据 checkFlag 的值跳转(对应 BluePrint 中的 flags[flagName].effectLevel)
+   */
+  nextNodeId: NodeId | EndingNodeId | ConditionalNextNodeId
+}
+
+/** 条件跳转节点 ID */
+interface ConditionalNextNodeId {
+  /** 需要检查的 flag 名称 */
+  checkFlag: string
+  /** flag 为 true 时的下一个节点 ID */
+  trueId: NodeId | EndingNodeId
+  /** flag 为 false 时的下一个节点 ID */
+  falseId: NodeId | EndingNodeId
 }
 ```
+
+##### 完整的数学约束
+
+```markdown
+# 剧情节点图的数据结构
+
+以下是该分层有向无环图（Layered Directed Acyclic Graph, **LDAG**）剧情结构的严谨数学约束定义：
+
+### 剧情系统 LDAG 数学约束模型
+
+设剧情图为 $G = (V_P, V_E, E)$，其中 $V_P$ 为剧情节点集，$V_E$ 为结局节点集，$E$ 为有向边集。
+
+#### 1. 集合定义与层级分区
+
+* **幕与层级分区**：剧情图 $G$ 由 $m$ 个有序的幕（Act）组成：$G = \{A_1, A_2, \dots, A_m\}$，其中 $3 \le m \le 4$。
+* **节点分区**：每一幕 $A_i$ 的节点集 $V_{P_i}$ 被划分为 $k_i$ 个不相交的子集（层）：$V_{P_i} = L_{i,1} \cup L_{i,2} \cup \dots \cup L_{i,k_i}$，其中 $8 \le k_i \le 15$。总层数 $k = \sum k_i$ 满足 $35 \le k \le 45$。
+* **幕起始节点**：每一幕的第一层 $L_{i,1}$ 必须且只能包含一个节点 $\{v_{start_i}\}$。即 $|L_{i,1}| = 1$。
+* **结局隔离**：结局节点集 $V_E$ 与剧情节点集 $V_P$ 互斥，$V_P \cap V_E = \emptyset$。且结局节点入度 $d^-(v) > 0$，出度 $d^+(v) = 0$（仅作为叶子节点）。
+
+#### 2. 拓扑分布约束 (Density Control)
+
+* **层宽约束**：对于任意层 $L_i \in V_P$，其基数满足 $1 \le |L_i| \le 3$。
+* **比例分布**：满足条件 $|L_i| = 2$ 的层数占比 $P(|L_i|=2) \ge 70\%$。
+
+#### 3. 边的单调性与跨度约束 (Edge Monotonicity)
+
+对于任意有向边 $e = (u, v) \in E$：
+
+* **严格递增**：若 $u \in L_i$ 且 $v \in L_j$（或 $v \in V_E$），则必须满足 $j > i$。
+* **禁止环路**：由于 $j > i$，图 $G$ 物理上不存在环路（Acyclic）。
+* **邻层倾向**：设 $E_{adj}$ 为满足 $j = i+1$ 的边集，则要求其在剧情节点间的边占比满足 $\frac{|E_{adj} \cap (V_P \times V_P)|}{|E \cap (V_P \times V_P)|} \ge 90\%$。
+
+#### 4. 强连通性约束 (Connectivity)
+
+* **全可达性**：对于任意节点 $v \in V_P \cup V_E$，必存在至少一条路径 $Path(v_{start} \to v)$。即 $G$ 中不存在孤立点或入度为 0 的非起始节点。
+* **结局可达性**：对于任意结局 $v_e \in V_E$，必存在路径 $Path(u \to v_e)$，其中 $u \in V_P$。
+* **禁止初级终结**：不存在边 $(v_{start}, v_e)$，其中 $v_{start} \in L_1, v_e \in V_E$。
+
+#### 5. 状态机闭环约束 (Flag Logic)
+
+设全局布尔标记集为 $F = \{f_1, f_2, \dots, f_m\}$，其中 $3 \le m \le 6$。
+对于任意 $f \in F$：
+
+* **定义域闭环**：标记 $f$ 必须在边集 $E$ 的属性中至少被执行一次 $Set(f)$ 操作和一次 $Check(f)$ 操作。
+* **因果序约束**：设 $SetNodes(f) = \{u \in V_P \mid \exists (u, v) \text{ s.t. } Set(f)\}$，设 $CheckNodes(f) = \{u \in V_P \mid \exists (u, v) \text{ s.t. } Check(f)\}$。则必须满足：$$\min_{u \in SetNodes(f)} (Level(u)) < \min_{w \in CheckNodes(f)} (Level(w))$$
+
+
+* **判定完备性**：所有 $Check(f)$ 操作必须提供完备的二元输出路径 $\{if\_true, if\_false\}$，且两个出口指向的节点 $v$ 必须满足层级约束。
+```
+
+##### 输出
+
+最终的输出不包含剧情节点的内容, 仅包含节点 ID, 角色, 选项, 跳转目标等信息
+
+### 3 生成节点内容
+
+有了前面生成的 剧本 和 逻辑拓扑, 我们就可以填充每个节点的剧情了, 这里我们选择每个 `act`(幕) 单独生成, 也就是所有的 `acts` 并发生成, 提升速度
+
+```markdown
+# 角色定义
+你是一位互动电影游戏编剧和总导演, 你擅长创作 引人入胜 / 逻辑严密 / 充满情感冲击力 的多分支剧情
+
+## 主题
+__TITLE__
+
+## 剧情简稿
+__SUMMARY__
+
+## 角色
+__CHARACTERS__
+
+## 当前幕剧情信息
+__ACT_INFO__
+
+## 任务
+你需要根据给定的 **剧情节点图结构** 和 **当前幕剧情信息**, 为每个节点填充具体的 **剧情内容** 和 **选项内容**。
+
+## 剧情节点图结构
+__LDAG_NODES__
+
+## 输出要求
+请输出符合以下 TypeScript 类型定义的 JSON 数据, 也就是一个 `LDAGNodes` 类型的 JSON 数据:
+
+\`\`\`typescript
+__LDAG_TYPES__
+\`\`\`
+
+## 注意事项
+1. 保持剧情的连贯性和逻辑性, 必须符合 **当前幕剧情信息** 的描述。
+2. 节点的 ID 和连接关系 **必须** 与输入的 **剧情节点图结构** 完全一致，不能增加、删除或修改节点和连线，只能填充内容。
+3. `content` 字段为剧情文本。
+4. `choices` 字段中的 `content` 为选项文本。
+5. 严格遵守 JSON 格式输出。
+
+```
+
+### 4 返回完整的剧情信息
+
+最后, 我们定义一下接口的最终返回值类型:
+
+```typescript
+import type { EndingNodes, LDAGActs } from "./LayeredDirectedAcyclicGraph";
+import { type BluePrint } from './BluePrint'
+
+/** 完整的生成完毕后的剧情信息 */
+export interface Story extends BluePrint {
+  /** 剧情节点图 JSON */
+  actList: LDAGActs
+  /** 结局节点集合 */
+  endings: EndingNodes
+}
+```
+
+### 完整计划稿
+
+可以在我的仓库中看到完整的 [plan 文件](https://github.com/SublimeCT/movie-games/blob/feature/main-generating/.claude/plan/generating/generating.md)(最终是由 `trae` 国际版完成的任务)
+
+## 总结
+
+![](./assets/images/movie-games-optimize-summary.png)
+
+通过这一系列的重构，我终于从 "把所有东西一股脑扔给 LLM" 的暴力美学中醒悟过来。我们总是期待 LLM 能成为那颗 **银弹**，能够一次性解决所有问题，但现实往往是它给了你一坨不可控的 `JSON`。
+
+构建工作流 (`Workflow`) 本质上是在给 LLM **降噪** 和 **祛魅**。
+
+- **祛魅**: 承认 LLM 的局限性，它不是全能的上帝，它记不住 80 个节点前的伏笔，也算不清复杂的概率收束。
+- **降噪**: 通过拆解任务，让 LLM 在每一个 `Stage` 只专注于一件事——要么是天马行空的剧本创作，要么是严谨的逻辑填空。
+
+现在的流程虽然看起来比最初的 "一键生成" 复杂了数倍:
+
+1. 先写剧本 (`BluePrint`) 📝
+2. 程序生成骨架 (`Topology`) 🦴
+3. 并发填充血肉 (`Content`) 🥩
+
+但这种 **"程序逻辑约束(Math) + AI 创意填充(Magic)"** 的模式，才是目前构建复杂 AI 应用的正确打开方式。程序保证了下限（至少能跑通，逻辑闭环），而 LLM 决定了上限（剧情是否精彩）。
+
+如果说上一篇文章是理想主义的碰壁，那这一篇就是工程主义的胜利。当然，这套方案也不是终点，生成的剧情依然可能存在逻辑漏洞，但至少，我们现在有了一个可以稳定迭代的 **基座**。
+
+接下来的挑战，就是如何让生成的游戏更好玩，以及如何把这个生成器真正做成一个产品。🚀
+
+
