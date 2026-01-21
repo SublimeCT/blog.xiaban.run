@@ -21,7 +21,7 @@ draft: false
 lang: 'zh-CN'
 ---
 
-在 [上一篇文章](/movie-games-record) 中, 介绍了一下我要做的互动剧情类游戏生成器, 然后分析了目前面临的严重影响使用的问题, 现在我们来通过构建工作流的方式来解决这些问题
+在 <a href="/movie-games-record" target="_blank">上一篇文章</a> 中, 介绍了一下我要做的互动剧情类游戏生成器, 然后分析了目前面临的严重影响使用的问题, 现在我们来通过构建工作流的方式来解决这些问题
 
 ## 失败的设计
 在现有的设计方案中, **我把一切都交给了 LLM**, 并且在 `propmpt` 中精心编写了各种限制, 我本以为它会生成符合所有要求的 `JSON`, 但是总是出现各种问题
@@ -109,12 +109,12 @@ typescript {}
 
 ### 剧情树设计存在的问题
 
-![现有的剧情树设计](./assets/images/movie-games-optimize-mow.excalidraw.svg)
+!<a href="./assets/images/movie-games-optimize-mow.excalidraw.svg" target="_blank">现有的剧情树设计</a>
 
 以上是现有的剧情树设计, 上方是剧情树中的节点, 下方是结局节点, 从 `Start Node` 节点开始, 每个节点都指向下一个层级(`level`)的某个节点(或者结局节点), 最终到达 `Endings` 节点结束, 通过设计图很容易发现一些问题:
 
 - 生成了 `21` 个节点, 最终玩家游玩一次只经过 `3 ~ 7` 个节点, 实际节点利用率只有 `14%` ~ `33%`, **大部分节点是玩家必须多次游玩才能到达, 但实际上很少会有玩家会玩第二次**
-- 上一篇文章介绍的 [剧情状态丢失](../movie-games-record/#剧情状态丢失) 问题
+- 上一篇文章介绍的 <a href="../movie-games-record/#剧情状态丢失" target="_blank">剧情状态丢失</a> 问题
 
 ### Layered Directed Acyclic Graph
 在上图中我们发现这已经不是一个树结构了, 我们需要一个准确的结构定义, 那就是 **分层有向无环图 (`Layered Directed Acyclic Graph`)**, 并在此基础上增加了额外的数学约束:
@@ -151,12 +151,12 @@ typescript {}
 - 剧情节点的并发生成方式
 
 可以点击查看所有模型的对话:
-- [ChatGPT](https://chatgpt.com/share/6964a414-ade4-800b-b839-5b53fd8a1ce4)
-- [Gemini](https://gemini.google.com/share/3359fe7f9880)
-- [DeepSeek](https://chat.deepseek.com/share/pysplefy24u9rk71gc)
+- <a href="https://chatgpt.com/share/6964a414-ade4-800b-b839-5b53fd8a1ce4" target="_blank">ChatGPT</a>
+- <a href="https://gemini.google.com/share/3359fe7f9880" target="_blank">Gemini</a>
+- <a href="https://chat.deepseek.com/share/pysplefy24u9rk71gc" target="_blank">DeepSeek</a>
 
 ### ChatGPT 激进的拆解派
-[点击这里](https://chatgpt.com/share/6964a414-ade4-800b-b839-5b53fd8a1ce4) 查看完整对话
+<a href="https://chatgpt.com/share/6964a414-ade4-800b-b839-5b53fd8a1ce4" target="_blank">点击这里</a> 查看完整对话
 
 #### Prompt A 节点规划
 这个 Prompt 只做一件事: **不关注具体的剧情内容, 只生成剧情数的结构**, 具体职责为:
@@ -200,7 +200,7 @@ typescript {}
 因此这个方案是失败的
 
 ### DeepSeek 分层生成策略
-[点击这里](https://chat.deepseek.com/share/pysplefy24u9rk71gc) 查看完整对话
+<a href="https://chat.deepseek.com/share/pysplefy24u9rk71gc" target="_blank">点击这里</a> 查看完整对话
 
 DeepSeek 的方案基本与 ChatGPT 方案一致, 唯一的不同点在于: 使用了
 
@@ -315,7 +315,7 @@ fn phase2_prompt(
 所以是个方案依然是失败的
 
 ### Gemini 有节奏感的剧情树设计
-[点击这里](https://gemini.google.com/share/3359fe7f9880) 查看完整对话
+<a href="https://gemini.google.com/share/3359fe7f9880" target="_blank">点击这里</a> 查看完整对话
 
 #### 生成纯逻辑的节点树骨架
 跟 ChatGPT 方案相似, 先生成节点树结构, 每个节点只生成:
@@ -716,7 +716,7 @@ interface BluePrintAct {
 
 ### 2. 生成逻辑拓扑
 
-接下来我们要构建具体的 剧情树结构, 在 [上篇文章](/movie-games-record) 中我们介绍了剧情树接口的要求, 以及因 `LLM` 输出的不稳定性可能导致的诸多问题, 因此我们尝试单独生成剧情树, 也就是逻辑拓扑结构, 我们有两个选择:
+接下来我们要构建具体的 剧情树结构, 在 <a href="/movie-games-record" target="_blank">上篇文章</a> 中我们介绍了剧情树接口的要求, 以及因 `LLM` 输出的不稳定性可能导致的诸多问题, 因此我们尝试单独生成剧情树, 也就是逻辑拓扑结构, 我们有两个选择:
 
 1. 让 LLM 使用只专注于生成剧情树结构, 尽可能少的关注剧情内容
   - 优势:
@@ -846,7 +846,7 @@ interface Choice {
 ```
 
 ##### 最终输出结果
-我测试了一下 [deepseek 的输出](https://chat.deepseek.com/share/nbodpwrki54a5coulb), 发现 LLM 根本无法生成结构严谨的逻辑拓扑, 出现了 [上篇文章](/movie-games-record) 一样的问题
+我测试了一下 <a href="https://chat.deepseek.com/share/nbodpwrki54a5coulb" target="_blank">deepseek 的输出</a>, 发现 LLM 根本无法生成结构严谨的逻辑拓扑, 出现了 <a href="/movie-games-record" target="_blank">上篇文章</a> 一样的问题
 
 #### 2.2 通过程序生成逻辑拓扑
 下面我们来通过程序实现一个简单的逻辑拓扑生成方法, 对应的输入就是 [剧情信息 Output](#剧情信息-output), 输出就是一个不包含实际内容的逻辑拓扑 JSON 字符串
@@ -1064,7 +1064,7 @@ export interface Story extends BluePrint {
 
 ### 完整计划稿
 
-可以在我的仓库中看到完整的 [plan 文件](https://github.com/SublimeCT/movie-games/blob/feature/main-generating/.claude/plan/generating/generating.md)(最终是由 `trae` 国际版完成的任务)
+可以在我的仓库中看到完整的 <a href="https://github.com/SublimeCT/movie-games/blob/feature/main-generating/.claude/plan/generating/generating.md" target="_blank">plan 文件</a>(最终是由 `trae` 国际版完成的任务)
 
 ## 总结
 
@@ -1090,3 +1090,18 @@ export interface Story extends BluePrint {
 接下来的挑战，就是如何让生成的游戏更好玩，以及如何把这个生成器真正做成一个产品。🚀
 
 
+
+
+## 参考
+- <a href="/movie-games-record" target="_blank">上一篇文章</a>
+- <a href="./assets/images/movie-games-optimize-mow.excalidraw.svg" target="_blank">现有的剧情树设计</a>
+- <a href="../movie-games-record/#剧情状态丢失" target="_blank">剧情状态丢失</a>
+- <a href="https://chatgpt.com/share/6964a414-ade4-800b-b839-5b53fd8a1ce4" target="_blank">ChatGPT</a>
+- <a href="https://gemini.google.com/share/3359fe7f9880" target="_blank">Gemini</a>
+- <a href="https://chat.deepseek.com/share/pysplefy24u9rk71gc" target="_blank">DeepSeek</a>
+- <a href="https://chatgpt.com/share/6964a414-ade4-800b-b839-5b53fd8a1ce4" target="_blank">点击这里</a>
+- <a href="https://chat.deepseek.com/share/pysplefy24u9rk71gc" target="_blank">点击这里</a>
+- <a href="https://gemini.google.com/share/3359fe7f9880" target="_blank">点击这里</a>
+- <a href="/movie-games-record" target="_blank">上篇文章</a>
+- <a href="https://chat.deepseek.com/share/nbodpwrki54a5coulb" target="_blank">deepseek 的输出</a>
+- <a href="https://github.com/SublimeCT/movie-games/blob/feature/main-generating/.claude/plan/generating/generating.md" target="_blank">plan 文件</a>
