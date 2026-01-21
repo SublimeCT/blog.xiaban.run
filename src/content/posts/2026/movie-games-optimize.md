@@ -17,7 +17,7 @@ tags: [
   '互动剧情类游戏生成器',
 ]
 category: '探索'
-draft: true 
+draft: false 
 lang: 'zh-CN'
 ---
 
