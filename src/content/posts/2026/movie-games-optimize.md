@@ -109,7 +109,7 @@ typescript {}
 
 ### 剧情树设计存在的问题
 
-!<a href="./assets/images/movie-games-optimize-mow.excalidraw.svg" target="_blank">现有的剧情树设计</a>
+![现有的剧情树设计](assets/images/movie-games-optimize-mow.excalidraw.svg)
 
 以上是现有的剧情树设计, 上方是剧情树中的节点, 下方是结局节点, 从 `Start Node` 节点开始, 每个节点都指向下一个层级(`level`)的某个节点(或者结局节点), 最终到达 `Endings` 节点结束, 通过设计图很容易发现一些问题:
 
