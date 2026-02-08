@@ -1,11 +1,12 @@
 ---
-title: 人工智能学习笔记 - 机器学习入门
+title: 机器学习入门之线性回归 - 人工智能学习笔记
 published: 2026-02-01
-description: '机器学习入门教程的学习笔记'
+description: '机器学习线性回归入门教程的学习笔记'
 image: './assets/images/ai-note-cover.png'
 tags: [
   '人工智能',
   '机器学习',
+  '线性回归',
   '笔记',
 ]
 category: '笔记'
@@ -42,7 +43,7 @@ lang: 'zh-CN'
 - ...
 
 ## 类别
-![](./assets/images/ai-machine-learning/category.png)
+![](./assets/images/ai-machine-learning-linear-regression/category.png)
 
 - 监督学习: 训练数据 **包含正确的结果(标签 - `label`)**; 可应用于 *人脸识别* / *语音翻译* / *医学诊断*
   - [线性回归](#线性回归)
@@ -77,17 +78,9 @@ xychart-beta
 
 ### 损失函数
 
-$$MSE = \frac{1}{2n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2$$
+均方误差(`MSE`):
 
-```mermaid
-graph TD
-    subgraph "数据空间 (Data Space)"
-    A[数据点群] --- B{直线: y = wx + b}
-    B --> C[预测高了: 误差大]
-    B --> D[预测准了: 误差小]
-    B --> E[预测低了: 误差大]
-    end
-```
+$$MSE = \frac{1}{2n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2$$
 
 ```mermaid
 xychart-beta
@@ -108,13 +101,25 @@ xychart-beta
 
 示例:
 
-![](./assets/images/ai-machine-learning/function-example.png)
+![](./assets/images/ai-machine-learning-linear-regression/function-example.png)
+
+### 决定系数($R^2$)
+
+决定系数($R^2$) 是用来评估 **线性回归模型** 拟合数据的优度 **goodness of fit** 的指标
+
+$$R^2 = 1 - \frac{SS_{res}}{SS_{tot}}$$
+
+- $SS_{res}$: 残差平方和(Residual Sum of Squares), 指的是预测值与真实值之间的误差平方和
+- $SS_{tot}$: 总平方和(Total Sum of Squares), 指的是不使用模型的预测值, 直接使用平均值产生的误差平方和
+
+> [!TIP]
+> **$R^2$ 的值越接近 `1`, 说明模型的拟合度越好**
 
 ### 梯度下降
-![](./assets/images/ai-machine-learning/ti-du-xia-jiang.png)
-![](./assets/images/ai-machine-learning/ti-du-xia-jiang2.png)
+![](./assets/images/ai-machine-learning-linear-regression/ti-du-xia-jiang.png)
+![](./assets/images/ai-machine-learning-linear-regression/ti-du-xia-jiang2.png)
 
-### 单因子线性回归 Demo
+## 单因子线性回归 Demo
 
 ```python
 import numpy
@@ -173,7 +178,7 @@ plt.plot(x, y_predict, color="orange")
 plt.show()
 ```
 
-![](./assets/images/ai-machine-learning/figure-result.png)
+![](./assets/images/ai-machine-learning-linear-regression/figure-result.png)
 
 
 ```python
@@ -184,4 +189,75 @@ print(model.intercept_)
 ```bash title="output"
 [[0.79754459]]
 [40.23121212]
+```
+
+## 多因子线性回归 Demo
+
+```python
+import polars as pl
+import numpy as np
+
+data = pl.read_csv("../../srv/china_housing_price.csv")
+data.head()
+```
+
+| Avg.Area Income | Avg.Area House Age | Avg.Area Number of Rooms | Avg.Area Population | size  | Price  |
+| --------------- | ------------------ | ------------------------ | ------------------- | ----- | ------ |
+| 185432.5        | 4.2                | 3                        | 25400               | 110.5 | 195.45 |
+| 210560.8        | 1.5                | 4                        | 32100               | 142.3 | 310.2  |
+| 156780.2        | 8.9                | 2                        | 15600               | 85.6  | 128.5  |
+| 192340.6        | 12.4               | 3                        | 41200               | 105.2 | 175.8  |
+| 178900.3        | 5.6                | 3                        | 28900               | 98.5  | 168.9  |
+
+```python
+import matplotlib.pyplot as plt
+
+# income = data.select(pl.col("Avg.Area Income"))
+# house_age = data.select(pl.col("Avg.Area House Age"))
+# rooms = data.select(pl.col("Avg.Area Number of Rooms"))
+# population = data.select(pl.col("Avg.Area Population"))
+size = data.select(pl.col("size"))
+price = data.select(pl.col("Price"))
+
+plt.figure(figsize=(5, 5))
+plt.scatter(size, price, color="blue")
+plt.title("Size vs Price")
+plt.show()
+```
+
+```python
+# 训练多因子线性回归模型
+
+x = data.select(
+  pl.col("Avg.Area Income"),
+  pl.col("Avg.Area House Age"),
+  pl.col("Avg.Area Number of Rooms"),
+  pl.col("Avg.Area Population"),
+  pl.col("size"),
+)
+
+multiple_model = LinearRegression()
+multiple_model.fit(x, price)
+
+multiple_predict = multiple_model.predict(x)
+
+plt.figure(figsize=(5, 5))
+plt.scatter(price, multiple_predict)
+plt.show()
+```
+
+![](./assets/images/ai-machine-learning-linear-regression/multifactor_figure.png)
+
+```python
+# 计算 均方误差 和 R2分数
+# from sklearn.metrics import mean_squared_error, r2_score
+mean_squared_error_multiple = mean_squared_error(price, multiple_predict)
+r2_score_multiple = r2_score(price, multiple_predict)
+print(mean_squared_error_multiple)
+print(r2_score_multiple)
+```
+
+```bash title="output"
+90.94828854645041
+0.9959162488939052
 ```
