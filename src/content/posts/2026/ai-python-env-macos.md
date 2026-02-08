@@ -14,7 +14,7 @@ draft: true
 lang: 'zh-CN'
 ---
 
-此文 **仅作为个人学习记录, 只适用于 `MacOS`, 遵循现代化和性能最优的原则**, 全程无废话, 只记录安装过程, 不展开介绍任何原理或概念
+此文 **仅作为个人学习记录, 只适用于 `MacOS`(`fish shell`)**, 遵循 **现代化** 和 **性能最优** 的原则, 全程无废话, 只记录安装过程, 不展开介绍任何原理或概念
 
 ## 原则
 - 现代化
@@ -26,9 +26,14 @@ lang: 'zh-CN'
 
 ### 安装清单
 ✅ 需要安装的:
-- `uv`
-- `jupyterlab`
-- `Pixi`
+- `uv`: 高性能现代化的 `Python` 包管理器, 可完全取代 `pip`
+- `jupyterlab`(`vscode`): 包含 `Jupyter notebook`, 可直接[使用 `vscode` 编辑 `ipynb` 文件](#使用-vscode-编辑-ipynb-文件)
+- `Pixi`: 替代 `conda`
+- `Scikit-learn`: 机器学习库
+
+:::tip[关于 Jupyter]
+`Jupyter` 已经有了更加现代化的替代品 [Marimo](https://marimo.io/), 应该完全替代 `Jupyter`, 但它的生态还不够完善, 所以建议 **优先使用 [Marimo](https://marimo.io/), 保留 `Jupyter`**, 详见 [#Marimo](#marimo)
+:::
 
 <span style="color: red;">🚫 不需要安装/使用的:</span>
 - `pip`
@@ -43,12 +48,12 @@ lang: 'zh-CN'
 #### 配置 pip 镜像
 受限于国内的网络环境, 配置国内的镜像是刚需
 
-**我们不使用 `pip`**, 但 [uv](https://docs.astral.sh/uv/) / [pixi](https://pixi.prefix.dev/latest/installation/) 都会读取 `~/.config/pip/pip.conf` 中的配置, 所以我们需要修改 `pip` 的配置文件
+**我们不使用 `pip`**, 但 [uv](https://docs.astral.sh/uv/) 会读取 `~/.config/pip/pip.conf` 中的配置, 所以我们需要修改 `pip` 的配置文件
 
 ```bash {1,5,9}
 pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 
-Writing to /Users/kuidi/.config/pip/pip.conf
+Writing to /Users/xxx/.config/pip/pip.conf
 
 pip config list
 
@@ -59,6 +64,9 @@ cat ~/.config/pip/pip.conf
 [global]
 index-url = https://pypi.tuna.tsinghua.edu.cn/simple
 ```
+
+> [!TIP]
+> [pixi](https://pixi.prefix.dev/latest/installation/) 配置镜像参考 [pixi 镜像配置](#pixi-镜像配置)
 
 ### uv
 `uv` 是一个使用 `rust` 编写的现代化的 **`Python` 包管理器**, **可完全取代 `pip`**
@@ -203,7 +211,7 @@ Pinned `.python-version` to `3.14`
 ```bash {1}
 uv python pin --global 3.14
 
-Pinned `/Users/kuidi/.config/uv/.python-version` to `3.14`
+Pinned `/Users/xxx/.config/uv/.python-version` to `3.14`
 ```
 
 此时会生成 `.python-version` 文件, 文件内容为 `3.14`
@@ -222,6 +230,54 @@ uv tool install jupyterlab
 jupyter-lab
 ```
 
+#### 使用 vscode 编辑 ipynb 文件
+1. 安装 `vscode` 插件 `Jupyter`, 直接在扩展中心搜索 `Jupyter` 并安装
+2. 创建/打开一个 `.ipynb` 文件
+3. 点击 **选择内核**
+![](./assets/images/ai-python-env-macos/jupyter-vscode-select-kernal.png)
+4. 选择 `Python` 版本
+![](./assets/images/ai-python-env-macos/jupyter-vscode-select-python.png)
+5. 点击 ▶️ 按钮执行
+![](./assets/images/ai-python-env-macos/jupyter-vscode-hello-world.png)
+
+### Marimo
+[Marimo](https://marimo.io/) 是一个开源的响应式的 `Python notebook`, 可用于替代 `Jupyter`
+
+```bash title="uv" {1}
+uv add marimo && uv run marimo tutorial intro
+```
+
+```bash title="pixi" {1}
+pixi add marimo && pixi run marimo tutorial intro
+
+        Edit intro.py in your browser 📝
+
+        ➜  URL: http://localhost:2718?access_token=lcJJegOCz7BbcHKX6DHsSQ
+
+```
+
+随后会打开一个网页, 显示 `Marimo` 的介绍, **但我们并不在网页中编辑, 而是在 `vscode` 中编辑:**
+
+![](./assets/images/ai-python-env-macos/marimo-vscode-extension.png)
+
+然后按 `command + shift + p`, 执行 `Create: New marimo notebook` 创建一个文件
+![](./assets/images/ai-python-env-macos/marimo-vscode-create-notebook.png)
+
+然后就可以像 `Jupyter notebook` 一样使用了:
+![](./assets/images/ai-python-env-macos/marimo-vscode-preview.png)
+
+#### 将 marimo note 文件转为 ipynb 文件
+```bash
+# 确保已经安装了 nbformat 库
+pixi add nbformat
+```
+
+将 `linear_regression.py` 文件转为 `linear_regression.ipynb` 文件
+
+```bash {1}
+pixi run marimo export ipynb course/2-liner-regression/linear_regression.py -o course/2-liner-regression/linear_regression.ipynb
+```
+
 ### Pixi
 [Pixi](https://pixi.prefix.dev/latest/installation/) 主要用于涉及到 C++ 库的编译 / R 环境配置 等场景, 并且内部调用的是 `uv`
 
@@ -236,8 +292,8 @@ Getting it from this url: https://github.com/prefix-dev/pixi/releases/latest/dow
   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
   0     0    0     0    0     0      0      0 --:--:--  0:00:01 --:--:--     0
 100 22.7M  100 22.7M    0     0   748k      0  0:00:31  0:00:31 --:--:--  538k
-The 'pixi' binary is installed into '/Users/kuidi/.pixi/bin'
-Updating '/Users/kuidi/.config/fish/config.fish'
+The 'pixi' binary is installed into '/Users/xxx/.pixi/bin'
+Updating '/Users/xxx/.config/fish/config.fish'
 Please restart or source your shell.
 ```
 
@@ -252,7 +308,112 @@ pixi completion --shell fish | source
 ```
 
 > [!TIP]
-> 对于 `AI` 相关的项目应该优先使用 [Pixi](https://pixi.prefix.dev/latest/installation/) 来管理环境
+> 对于需要 **跨语言依赖或系统级库** 时特别是 `AI` 相关的项目应该优先使用 [Pixi](https://pixi.prefix.dev/latest/installation/) 来管理环境, 而对于普通的 `python` 项目, 应该使用 [uv](https://docs.astral.sh/uv/)
+> 例如项目需要 `python` / `node` / `CMake` / `Rust`:
+> ```bash
+> pixi add python nodejs cmake rust
+> ```
+
+## 创建一个人工智能相关的项目
+> 对于 AI 项目, 我们必须使用 `pixi` 来管理环境, 因为 `pixi` 是面向跨语言环境的
+
+```bash {1,5}
+pixi init ai-demo
+
+✔ Created /Users/xxx/projects/ai-demo/pixi.toml
+
+cd ai-demo && lsd -la
+
+drwxr-xr-x xxx staff 160 B Sat Feb  7 10:20:21 2026  .
+drwxr-xr-x xxx staff 768 B Sat Feb  7 10:20:21 2026  ..
+.rw-r--r-- xxx staff 128 B Sat Feb  7 10:20:21 2026  .gitattributes
+.rw-r--r-- xxx staff  47 B Sat Feb  7 10:20:21 2026  .gitignore
+.rw-r--r-- xxx staff 161 B Sat Feb  7 10:20:21 2026  pixi.toml
+```
+
+添加依赖:
+```bash
+pixi add python httpx
+```
+
+> [!TIP]
+> - 此处的依赖默认是从 `conda-forge` 渠道安装的, 可以通过 `--channel` 参数指定其他渠道
+> - 这里也需要安装 `python`, 因为 `pixi` 与 `conda` 类似, 是面向跨语言环境的, 是用来管理完全 **跨平台** / **依赖隔离** 的项目环境的
+> - 也可以指定依赖版本: `pixi add python@3.14`
+> - 也可以指定从 `PyPI` 安装依赖: `pixi add --pypi httpx`
+
+更新依赖:
+```bash
+pixi update httpx
+```
+
+定义和执行任务:
+```bash {1,5,21}
+pixi task add hello "echo \"Hello World\""
+
+✔ Added task `hello`: echo "Hello World"
+
+cat pixi.toml
+
+[workspace]
+authors = ["Ryan <hellosc@qq.com>"]
+channels = ["conda-forge"]
+name = "ai-demo"
+platforms = ["osx-arm64"]
+version = "0.1.0"
+
+[tasks]
+hello = 'echo "Hello World"'
+
+[dependencies]
+httpx = ">=0.28.1,<0.29"
+python = ">=3.14.3,<3.15"
+
+pixi run hello
+
+✨ Pixi task (hello): echo "Hello World"
+Hello World
+```
+
+删除当前环境(`.pixi`):
+```bash
+pixi clean
+```
+
+### pixi cli
+更多使用实例参考 [Basic Usage of Pixi](https://pixi.prefix.dev/latest/getting_started/#basic-usage-of-pixi)
+
+### pixi 镜像配置
+鉴于国内的网络环境, 推荐配置 `pixi` 镜像:
+
+```bash {title="$HOME/.pixi/config.toml"}
+[pypi-config]
+extra-index-urls = [
+  "https://pypi.tuna.tsinghua.edu.cn/simple",
+  "https://pypi.org/simple",
+]
+index-url = "https://mirrors.aliyun.com/pypi/simple"
+
+[mirrors]
+"https://conda.anaconda.org/bioconda" = [
+  "https://mirrors.ustc.edu.cn/anaconda/cloud/bioconda",
+]
+"https://conda.anaconda.org/conda-forge" = [
+  "https://mirrors.ustc.edu.cn/anaconda/cloud/conda-forge",
+]
+"https://conda.anaconda.org/pytorch" = [
+  "https://mirrors.ustc.edu.cn/anaconda/cloud/pytorch",
+]
+"https://repo.anaconda.com/pkgs/main" = [
+  "https://mirrors.ustc.edu.cn/anaconda/pkgs/main",
+]
+"https://repo.anaconda.com/pkgs/msys2" = [
+  "https://mirrors.ustc.edu.cn/anaconda/pkgs/msys2",
+]
+"https://repo.anaconda.com/pkgs/r" = [
+  "https://mirrors.ustc.edu.cn/anaconda/pkgs/r",
+]
+```
 
 ## 附1 清理多余的 python
 

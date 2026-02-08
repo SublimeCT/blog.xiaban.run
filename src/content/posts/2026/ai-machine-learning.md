@@ -113,3 +113,75 @@ xychart-beta
 ### 梯度下降
 ![](./assets/images/ai-machine-learning/ti-du-xia-jiang.png)
 ![](./assets/images/ai-machine-learning/ti-du-xia-jiang2.png)
+
+### 单因子线性回归 Demo
+
+```python
+import numpy
+import polars
+
+# numpy.random.seed(42) # 设置随机种子
+area = numpy.linspace(60, 200, 21) # 生成 从 50 ~ 200 的 20 个线性值插值
+nonce = numpy.random.normal(10, 6, 21) # 生成 20 个服从正态分布的随机数, 均值为 10, 标准差为 6
+price = 0.8 * area + 30 + nonce # 房屋价格 = 面积 * 0.8 + 30 + 随机数
+
+data = polars.DataFrame({
+  "area": area,
+  "price": price,
+}).with_columns(
+  polars.col("area").round(2), # 保留 2 位小数
+  polars.col("price").round(2),
+)
+
+data.head()
+```
+
+| area  | price  |
+| ----- | ------ |
+| 50    | 78.68  |
+| 57.89 | 88.46  |
+| 65.79 | 101.5  |
+| 73.68 | 95.84  |
+| 81.58 | 100.41 |
+
+
+```python
+from sklearn.linear_model import LinearRegression
+x = data.select(polars.col("area"))
+y = data.select(polars.col("price"))
+
+model = LinearRegression()
+model.fit(x, y) # 拟合模型
+
+new_area = polars.DataFrame({ "area": [60] }) # 房屋面积为 60m^2
+predicted_price = model.predict(new_area) # 预测房屋价格
+print(predicted_price) # 输出预测结果
+```
+
+```bash title="output"
+[[125.]]
+```
+
+```python
+import matplotlib.pyplot as plt
+
+y_predict = model.predict(x)
+
+plt.figure(figsize=(5, 5))
+plt.scatter(x, y)
+plt.plot(x, y_predict, color="orange")
+plt.show()
+```
+
+![](./assets/images/ai-machine-learning/figure-result.png)
+
+
+```python
+print(model.coef_)
+print(model.intercept_)
+```
+
+```bash title="output"
+[[0.79754459]]
+[40.23121212]
+```
