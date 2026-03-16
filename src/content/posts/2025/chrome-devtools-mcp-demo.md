@@ -27,7 +27,7 @@ lang: 'zh-CN'
 ## 安装
 以 `Claude Code` 为例(高亮部分为输出):
 ```bash {3,4}
-claude mcp add chrome-devtools npx chrome-devtools-mcp@latest
+claude mcp add chrome-devtools --scope user npx chrome-devtools-mcp@latest
 
 Added stdio MCP server chrome-devtools with command: npx chrome-devtools-mcp@latest to local config
 File modified: /Users/xxx/.claude.json [project: /Users/xxx/projects/blog.xiaban.run]
