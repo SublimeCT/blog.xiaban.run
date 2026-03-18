@@ -163,7 +163,7 @@ open ~/Library/Application\ Support/Google/Chrome/Default/Extensions/gbpdfapgefe
 
 文件比较少, 我们先查看 `content.js`:
 
-![](./assets/images/chrome-webmcp/chrome-flags-enable-webmcp-testing.png)
+![](./assets/images/chrome-webmcp/webmcp-chrome-extension-flag-enable-error.png)
 
 首先监测是否开启了 `WebMCP Testing` 标志
 
