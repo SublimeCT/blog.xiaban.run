@@ -271,7 +271,7 @@ export default App
 接下来我们来尝试一下在 `Claude Code` 中调用 `WebMCP`, 由于 `LLM` 并不知道 `WebMCP API` 的存在, 所以我根据 `mcp-b` 的文档, 编写一个简单的 `skills`, 我已经写好了, 可以参考 <a href="https://github.com/SublimeCT/webmcp-agent" target="_blank">SublimeCT/webmcp-agent</a>, 我们来直接安装它
 
 ```bash
-skills add SublimeCT/webmcp-agent
+npx skills add SublimeCT/webmcp-agent
 
 ███████╗██╗  ██╗██╗██╗     ██╗     ███████╗
 ██╔════╝██║ ██╔╝██║██║     ██║     ██╔════╝
