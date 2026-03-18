@@ -154,7 +154,7 @@ navigator.modelContext.registerTool({
 
 我们来扒一下这个 `extension` 的源码:
 
-1. 进入扩展的详情页, 赋值 `ID`
+1. 进入扩展的详情页, 复制 `ID`
 ![](./assets/images/chrome-webmcp/webmcp-chrome-extension-details.png)
 2. 进入 `Google Chrome` 的插件目录
 ```bash
@@ -266,7 +266,7 @@ export default App
 
 ### AI Agent 调用 WebMCP
 
-至此我们完成了 `WebMCP` 的基本使用, 可笑的是网络上大部分教程也都止步于此, 明明 `WebMCP` 是让 `AI Agent` 进行调用的啊, 前端自己执行算是怎么回事?
+至此我们完成了 `WebMCP` 的声明, 可笑的是网络上大部分教程也都止步于此, 明明 `WebMCP` 是让 `AI Agent` 进行调用的啊, 前端自己执行算是怎么回事?
 
 接下来我们来尝试一下在 `Claude Code` 中调用 `WebMCP`, 由于 `LLM` 并不知道 `WebMCP API` 的存在, 所以我根据 `mcp-b` 的文档, 编写一个简单的 `skills`, 我已经写好了, 可以参考 <a href="https://github.com/SublimeCT/webmcp-agent" target="_blank">SublimeCT/webmcp-agent</a>, 我们来直接安装它
 
