@@ -71,7 +71,7 @@ choco install opencode
 opencode zen 提供的免费模型好像有频率限制, 不是很稳定, 而且不支持 <a href="https://docs.bigmodel.cn/cn/coding-plan/mcp/vision-mcp-server" target="_blank">GLM 的 视觉理解等 MCP 服务</a>, 这里可以直接接入已经订阅的 <a href="https://www.bigmodel.cn/claude-code?cc=fission_glmcode_sub_v1&ic=Q2N8XA4W77&n=a****3" target="_blank">GLM Coding Plan</a>
 
 :::note[推广]
-如果想要获得最好的 `Vibe Coding` 体验, 推荐购买 <a href="https://www.bigmodel.cn/claude-code?cc=fission_glmcode_sub_v1&ic=Q2N8XA4W77&n=a****3" target="_blank">🔗 GLM Coding Lite</a> 服务(也可以 <a href="https://www.bigmodel.cn/activity/trial-card/A8AMOHCHA5" target="_blank">🔗 点击这里</a> 先免费试用 7 天), 包月只要 20 💰, `Lite` 版本的按 `Prompt` 计费, 每 `5` 小时最多约 `120` 次 `prompts`, 原因如下:
+如果想要获得最好的 `Vibe Coding` 体验, 推荐购买 <a href="https://www.bigmodel.cn/claude-code?cc=fission_glmcode_sub_v1&ic=Q2N8XA4W77&n=a****3" target="_blank">🔗 GLM Coding Lite</a> 服务(也可以 <a href="https://www.bigmodel.cn/activity/trial-card/XN7FDWQG9S" target="_blank">🔗 点击这里</a> 先免费试用 7 天), 包月只要 20 💰, `Lite` 版本的按 `Prompt` 计费, 每 `5` 小时最多约 `120` 次 `prompts`, 原因如下:
 :::
 
 ```bash title="pnpm" {1}
@@ -510,7 +510,7 @@ Include proper typing and basic structure.
 - [bun](https://bun.com/)
 - [GLM 的 视觉理解等 MCP 服务](https://docs.bigmodel.cn/cn/coding-plan/mcp/vision-mcp-server)
 - [GLM Coding Plan](https://www.bigmodel.cn/claude-code?cc=fission_glmcode_sub_v1&ic=Q2N8XA4W77&n=a****3)
-- [点击这里](https://www.bigmodel.cn/activity/trial-card/A8AMOHCHA5)
+- [点击这里](https://www.bigmodel.cn/activity/trial-card/XN7FDWQG9S)
 - [editor setup - OpenCode](https://opencode.ai/docs/tui/#editor-setup)
 - [Slash Commands](https://code.claude.com/docs/zh-CN/slash-commands)
 - [Claude Code 系列教程之 斜杠命令(Slash Commands)](../../2025/claude-code-slash-commands/)

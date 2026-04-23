@@ -113,7 +113,7 @@ lang: 'zh-CN'
 图片生成使用 GLM 的免费(限制并发)文生图模型 <a href="https://docs.bigmodel.cn/cn/guide/models/free/cogview-3-flash" target="_blank">cogview-3-flash</a>, 虽然质量很差, 但是它免费用我高低得夸它一下
 
 > [!TIP]
-> 非常感谢智谱慷慨得提供免费模型, 如果你有 `Coding` 的需求, 可以购买智谱的 <a href="https://www.bigmodel.cn/claude-code?cc=fission_glmcode_sub_v1&ic=Q2N8XA4W77&n=a****3" target="_blank">🔗 GLM Coding Plan</a> 订阅支持一下, 或者 [点击这里试用](https://www.bigmodel.cn/activity/trial-card/A8AMOHCHA5)
+> 非常感谢智谱慷慨得提供免费模型, 如果你有 `Coding` 的需求, 可以购买智谱的 <a href="https://www.bigmodel.cn/claude-code?cc=fission_glmcode_sub_v1&ic=Q2N8XA4W77&n=a****3" target="_blank">🔗 GLM Coding Plan</a> 订阅支持一下, 或者 [点击这里试用](https://www.bigmodel.cn/activity/trial-card/XN7FDWQG9S)
 
 ### ~~视频生成~~
 其实也试过 GLM 的免费(限制并发)的视频生成模型 <a href="https://docs.bigmodel.cn/cn/guide/models/free/cogvideox-flash" target="_blank">cogvideox-flash</a>, 但是生成一个视频大概需要 3 分钟, 而且限制并发数只有 1, 生成的视频质量 emmmmm 非常拉, 其他的商业模型成本太高, 就没有使用视频生成
