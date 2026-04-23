@@ -21,7 +21,7 @@ lang: 'zh-CN'
 > `2025-09-05`, `Anthropic` 发布了一篇公告: [更新对不受支持地区的销售限制](https://www.anthropic.com/news/updating-restrictions-of-sales-to-unsupported-regions), 将中国定义为敌对国家, 并且不再为中国公司(包含超过 50% 所有权的中国公司的子公司)提供服务
 > 
 > 这意味着 **在未来我们使用 `Claude` 服务的难度将越来越大**
-我在使用GLM Coding Plan，数小时内完成过去需要数周的开发工作，赠送你1张7天AI Coding体验卡，一起来用吧：https://bigmodel.cn/activity/trial-card/XN7FDWQG9S
+
 > [!TIP]
 > 如果想要获得最好的 `Vibe Coding` 体验, 推荐购买 <a href="https://www.bigmodel.cn/claude-code?cc=fission_glmcode_sub_v1&ic=Q2N8XA4W77&n=a****3" target="_blank">🔗 GLM Coding Lite</a> 服务(也可以 <a href="https://www.bigmodel.cn/activity/trial-card/XN7FDWQG9S">🔗 点击这里</a> 先免费试用 7 天), 包月只要 20 💰, `Lite` 版本的按 `Prompt` 计费, 每 `5` 小时最多约 `120` 次 `prompts`, 原因如下:
 > - `Claude Code` 消耗的 `token` 非常多(我现在一个月已经消耗了 `3` 亿多 `tokens` 💪), 如果按 `token` 消耗量计费会非常贵, 使用包月套餐可以无需担心消耗的 `token` 数量, 专注于 `Vibe Coding`
