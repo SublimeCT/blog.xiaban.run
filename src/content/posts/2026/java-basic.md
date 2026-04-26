@@ -281,3 +281,16 @@ List<String> stringList = Arrays.stream(stringArr).toList();
 int[] arr2 = list.stream().mapToInt(Integer::intValue).toArray(); // 需要调用 mapToInt 拆箱(Integer -> int)
 String[] stringArr2 = stringList.toArray(new String[0]);
 ```
+
+## 面向对象
+### 基本原则
+- 单一职责原则: 每个类只负责一个功能, 不要负责多个功能
+- 开闭原则: 类的定义应该是可扩展的, 但是对修改关闭
+- 里氏替换原则: 子类可以替换父类, 而不会影响程序的正确性
+- 依赖倒置原则: 类依赖于抽象, 而不是依赖于具体实现
+- 接口隔离原则: 类只依赖于它需要的特定接口, 而不是依赖于通用的接口
+
+### 面向对象的特性
+- 封装
+- 继承
+- 多态
