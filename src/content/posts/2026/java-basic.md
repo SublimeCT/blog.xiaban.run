@@ -224,3 +224,60 @@ public class Main {
 | `printf()`  | ✅        | ✅      |
 | `println()` | ✅        | ❌      |
 | `format()`  | ❌        | ✅      |
+
+## 数组
+```java
+// 静态初始化
+int[] arr = {1, 2, 3};
+int[] arr1 = new int[] {1,2,3}; // 可以不写长度
+
+// 动态初始化, 每项都有默认值
+int[] arr2 = new int[3]; // 必须写长度
+arr2[0] = 1;
+arr2[1] = 2;
+arr2[2] = 3;
+
+// 多维数组
+int [][] arr3 = {{1, 2, 3}, {4, 5, 6}};
+
+// 引用类型数组
+Pet[] pets = new Pet[3];
+pets[0] = new Dot();
+pets[1] = new Cat();
+pets[2] = new Dog();
+```
+
+- 初始化时每一项都有默认值, 引用类型数组的默认值为 `null`
+- 初始化后长度不可变
+
+### 遍历数组
+```java
+int[] arr = new int[] {1, 2, 3};
+// 遍历数组(value)
+for (int item : arr) {
+    System.out.println(item);
+}
+// 遍历数组(index & value)
+for (int i = 0; i < arr.length; i++) {
+    System.out.println(arr[i]);
+}
+```
+
+### 数组排序
+```java
+Arrays.sort(arr);
+```
+
+### 数组转 List
+```java
+int[] arr = new int[] {1, 2, 3};
+String[] stringArr = new String[] {"Hello", "World"};
+
+// 数组转 List
+List<Integer> list = Arrays.stream(arr).boxed().toList(); // 需要先 boxed 将 IntStream 转为 Stream
+List<String> stringList = Arrays.stream(stringArr).toList();
+
+// List 转数组
+int[] arr2 = list.stream().mapToInt(Integer::intValue).toArray(); // 需要调用 mapToInt 拆箱(Integer -> int)
+String[] stringArr2 = stringList.toArray(new String[0]);
+```
