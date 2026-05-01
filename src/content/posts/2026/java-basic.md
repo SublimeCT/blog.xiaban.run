@@ -294,3 +294,38 @@ String[] stringArr2 = stringList.toArray(new String[0]);
 - 封装
 - 继承
 - 多态
+
+## package
+### 格式
+```java
+// package 域名反写 + 功能模块名(支持多级)
+package com.example.app;
+```
+
+### 规范
+- 包名必须 **全小写**, **避免使用保留关键字**
+- 必须 **放到文件顶部**
+- 每个文件 **只能有一个 package 语句**
+- **包名 必须与 目录结构 匹配**, 例如 `com/example/app` 对应 `src/main/java/com/example/app`
+
+## jar
+
+### 介绍
+`JAR(Java Archive)` = `ZIP` 压缩包 + `Java` 元数据(`META-INF/MANIFEST.MF`)
+
+### 用途
+- 发布 `Java` 应用
+- 作为依赖库
+- 打包为可执行程序
+
+### 使用
+```bash
+# 1. 编译, -d 输出目录 源码路径 👉 把 Java 变成 JVM 字节码
+javac -d out src/com/example/controller/Main.java
+# 2. 打包, -C 输出目录 包含的文件路径 👉 把“目录结构 + class + 元信息”打包
+jar --create --file app.jar --main-class com.example.controller.Main -C out .
+# 3. 执行, 👉 读取 MANIFEST → 找 main class → 执行 main()
+java -jar app.jar
+
+Hello World
+```
