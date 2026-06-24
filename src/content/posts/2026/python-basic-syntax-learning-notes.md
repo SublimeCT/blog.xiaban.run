@@ -424,6 +424,12 @@ pixi run python -c "import PySide6; print(PySide6.__version__)" # 输出 6.11.1
 | 管理运行环境版本   | `nvm install 20`                | `uv python install 3.14`              |          |                    |
 
 #### 文件操作
+| 语法   | TypeScript      | Python             | 是否一致 | 备注                   |
+| ------ | --------------- | ------------------ | -------- | ---------------------- |
+| 异步   | `Promise.all()` | `asyncio.gather()` |          | `python` 为协程        |
+| 多线程 | `Thread`        | `threading.Thread` |          | 参考 [多线程](#多线程) |
+
+#### 文件操作
 | 语法     | TypeScript                           | Python                                              | 是否一致 | 备注                |
 | -------- | ------------------------------------ | --------------------------------------------------- | -------- | ------------------- |
 | 读取文件 | `fs.readFile('file.txt')`            | `with open('file.txt', 'r') as f: print(f.read())`  |          |                     |
@@ -887,6 +893,7 @@ if __name__ == "__main__":  # Windows/MacOS 下多进程必须加这句，防止
 ```
 
 ### 协程
+并发请求示例(`asyncio.gather()`):
 ```python
 import asyncio
 import httpx
@@ -904,6 +911,48 @@ async def main():
   results = await asyncio.gather(*task) # 解包
   print(results)
 
+asyncio.run(main())
+```
+
+不阻塞主线程(`asyncio.create_task()`):
+```python
+import asyncio
+import httpx
+
+async def fetch_deepseek(prompt: str) -> str:
+    url = "https://api.deepseek.com/v1/chat/completions"
+    headers = {
+        "Authorization": "Bearer your_deepseek_api_key",
+        "Content-Type": "application/json"
+    }
+    data = {
+        "model": "deepseek-chat",
+        "messages": [{"role": "user", "content": prompt}]
+    }
+    async with httpx.AsyncClient() as client:
+        response = await client.post(url, json=data, headers=headers, timeout=60.0)
+        return response.json()["choices"][0]["message"]["content"]
+
+async def main():
+    print("[主流程] 准备派发后台任务...")
+    
+    # 核心语法：create_task 相当于在 JS 中直接执行了一个 async 函数而不去 await 它
+    # 此时，DeepSeek 的网络请求已经由底层事件循环发出去了！
+    background_job = asyncio.create_task(fetch_deepseek("写一首关于前端程序员的诗"))
+    
+    # 主流程完全不会被上面的网络请求阻塞，立刻向下走
+    print("[主流程] 后台任务已投递，主线程继续做其他同步或异步事情...")
+    for i in range(4):
+        print(f"[主流程] 正在处理 UI 渲染或日志打印... {i}")
+        await asyncio.sleep(0.5) # 释放一下控制权，让后台任务有机会收发网络包
+        
+    print("[主流程] 自己的事干完了，现在来拿后台任务的最终结果...")
+    
+    # 如果后台任务此时还没请求完，此处会同步等待它完工；如果已经完工，则直接拿到返回值
+    final_result = await background_job
+    print("\n[后台任务返回]：\n", final_result)
+
+# 启动原生事件循环
 asyncio.run(main())
 ```
 
@@ -1068,6 +1117,65 @@ print(res)
 - `autoDocstring - Python Docstring Generator`: 自动补全注释
 
 ## 常见问题
+### 本地模块名称跟第三方包模块名称冲突如何解决
+本地存在 `src/openai.py`, 与第三方包 `openai` 冲突, 导致导入错误, 此时应该修改本地文件名称, 例如将模块放入 `src/app/openai.api` 或改为 `src/openai_local.py`
+
+### 如何将 src 加入到 sys.path 中
+`import` 时 `python` 只会在 `sys.path` 中寻找模块, 对于需要引用 `src` 目录下的模块的情况, 会直接报错:
+
+`src/utils/sum.py`:
+```python
+def sum(a, b):
+  return a + b
+```
+
+`src/main.py`:
+```python
+from utils.sum import sum
+
+print(sum(1, 2))
+```
+
+```bash {1}
+uv run src/main.py
+
+Using CPython 3.13.11
+Creating virtual environment at: .venv
+Traceback (most recent call last):
+  File "/Users/xxx/projects/python_sys_path_demo/src/main.py", line 1, in <module>
+    from utils.sum import sum
+ModuleNotFoundError: No module named 'utils.sum'
+```
+
+#### 解决方案1-uv
+
+```bash
+uv run -m src.main
+```
+
+> [!TIP]
+> 这是推荐的方法
+
+#### 解决方案2-pyproject.toml
+
+1. 修改 `pyproject.toml`:
+```bash {6-11}
+[project]
+name = "python-sys-path-demo"
+version = "0.1.0"
+requires-python = ">=3.13"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/utils"]
+```
+
+2. 执行 `uv pip install -e .` 或 `uv sync`
+3. `uv run src/main.py`
+
 ### CPython 是什么
 `CPython` 是官方默认的 Python 解释器, 由 C 语言编写, 在执行时会先将 Python 代码编译成字节码文件(`.pyc` 文件, 位于 `__pycache__` 目录下), 然后再使用虚拟机(`PVM`) 读取并转换为机器码执行
 
