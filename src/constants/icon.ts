@@ -41,4 +41,9 @@ export const defaultFavicons: Favicon[] = [
 		theme: "dark",
 		sizes: "192x192",
 	},
+	{
+		// SVG 主图标，现代浏览器优先使用；上面的 PNG 作为老旧环境 fallback
+		src: "/exit.svg",
+		sizes: "any",
+	},
 ];
