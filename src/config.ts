@@ -17,12 +17,12 @@ export const siteConfig: SiteConfig = {
 	},
 	banner: {
 		enable: true,
-		src: "assets/images/seaside.jpeg", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
+		src: "assets/images/Waterfall.png", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
 		position: "center", // Equivalent to object-position, only supports 'top', 'center', 'bottom'. 'center' by default
 		credit: {
 			enable: true, // Display the credit text of the banner image
-			text: "青岛红树林度假世界 | 拍摄地", // Credit text to be displayed
-			url: "https://maps.app.goo.gl/sGPWMG3ZdFCFAEXh8", // (Optional) URL link to the original artwork or artist's page
+			text: "Háifoss - Háafossvegur, 804冰岛 | 怪奇物语剧照", // Credit text to be displayed
+			url: "https://maps.app.goo.gl/1k7XELux5trcEZUt6", // (Optional) URL link to the original artwork or artist's page
 		},
 	},
 	toc: {
